@@ -30,7 +30,7 @@ function Select({ID, Placeholder, Label, optionsTab} : { ID: string, Placeholder
 
     return(
         <>
-            <label htmlFor = {ID} className="my-3">{Label}</label>
+            <label htmlFor = {ID} className="my-3 font-bold">{Label}</label>
             <div className="flex flex-col">
                 <input id={ID} name={ID} placeholder={Placeholder} required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black" value={choice} onChange={(e) => {setChoice(e.target.value); setClicked(false);}} onFocus={handleFocus} onBlur={handleBlur} />
                 {(!clicked) && isFocused && (OptionsTab.length !== 0) && <div className="bg-white relative border-2 border-black rounded-lg" style={{maxHeight: '300px', overflowY: 'auto'}}>{OptionsTab.map((option) => {return <option onClick={() => {setChoice(option); setClicked(true);}} className="m-0 border-b h-12 border-black p-3 relative cursor-pointer" key={option}>{option}</option>})}</div>}

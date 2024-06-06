@@ -81,11 +81,11 @@ function SignUp() {
 
             <br />
 
-            {type === "pat" && <Select ID="optionsVille" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
-            {(type === "med" || type === "sec") && <Select ID="optionsHospital" Placeholder="Hôpital Principal de Dakar par exemple" Label="Etablissement médical" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
+            {type === "pat" && <Select ID="region" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
+            {(type === "med" || type === "sec") && <Select ID="hospital" Placeholder="Hôpital Principal de Dakar par exemple" Label="Etablissement médical" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
             
-            {type === "sec" && <Input Type="text" Placeholder="0123456789" Label="ID du Médecin" ID="doctorID" />}
-            {type === "med" && <Input Type="text" Placeholder="Médecine générale ou Pédiatrie-Psychiatrie" Label="Spécialité (s)" ID="domain" />}
+            {type === "sec" && <Input Type="text" Placeholder="0123456789" Label="ID du Médecin" ID="medID" />}
+            {type === "med" && <Input Type="text" Placeholder="Médecine générale ou Pédiatrie-Psychiatrie" Label="Spécialité (s)" ID="speciality" />}
 
             {(type === "med" || type === "sec") && <br />}
             <PhoneBlock />

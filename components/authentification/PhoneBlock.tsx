@@ -27,7 +27,7 @@ function PhoneBlock () {
 
     return(
         <>
-            <label htmlFor = "telephone" className="my-3">Téléphone</label>
+            <label htmlFor = "telephone" className="my-3 font-bold">Téléphone</label>
             <div className="grid grid-cols-10 items-center">
                 <span className="flex items-center justify-center col-span-3 h-12 bg-white px-1 mr-2 border-2 border-black rounded-lg">
                     <Image src = "/auth/flag.png" alt = "countryFlag" width="32" height="32" className="mr-1" />

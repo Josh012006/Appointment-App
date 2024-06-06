@@ -15,6 +15,24 @@ export default function Form ({children, ID, Type, userType} : {children : React
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
 
+    interface User {
+        type: string;
+        lastName: FormDataEntryValue | null;
+        firstName: FormDataEntryValue | null;
+        mail: FormDataEntryValue | null;
+        password: FormDataEntryValue | null;
+        phone: FormDataEntryValue | null;
+
+        region?: FormDataEntryValue | null;
+
+        medID?: FormDataEntryValue | null;
+
+        hospital?: FormDataEntryValue | null;
+
+        gender?: FormDataEntryValue | null;
+        speciality?: FormDataEntryValue | null;
+    }
+
     // Gérer la soumission avec une requête
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -32,18 +50,25 @@ export default function Form ({children, ID, Type, userType} : {children : React
             // Faire une requête vers la route de connexion et faire la redirection si c'est réussie avec un delay
         }
         else {
-            const lastName = formData.get("mail");
-            const firstName = formData.get("mail");
-            const phone = formData.get("mail");
+            const lastName = formData.get("nom");
+            const firstName = formData.get("prenom");
+            const phone = formData.get("telephone");
+
+            const infos: User = {type: userType, lastName, firstName, mail, password, phone};
 
             if(userType === "pat") {
-
-            }
-            else if(userType === "sec") {
-
+                infos.region = formData.get("region");
             }
             else {
 
+                infos.hospital = formData.get("hospital");
+
+                if(userType === "sec") {
+                    infos.medID = formData.get("medID");
+                }
+                else {
+                    infos.speciality = formData.get("speciality");
+                }
             }
         }
     }
