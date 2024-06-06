@@ -12,7 +12,8 @@ import { useState } from "react";
 
 export default function Form ({children, ID, Type, userType} : {children : React.ReactNode, ID: string, Type: "login" | "signup", userType: string}) {
 
-    const [error, setError] = useState(false);
+    const [error1, setError1] = useState(false);
+    const [error2, setError2] = useState(false);
     const [success, setSuccess] = useState(false);
 
     interface User {
@@ -68,8 +69,13 @@ export default function Form ({children, ID, Type, userType} : {children : React
                 }
                 else {
                     infos.speciality = formData.get("speciality");
+
+                    const male = Boolean(formData.get("genderM"));
+                    infos.gender = (male)? "male" : "female";
                 }
             }
+
+            // Faire une requête pour ajouter l'utilisateur et le rediriger si c'est réussi
         }
     }
 
@@ -79,8 +85,9 @@ export default function Form ({children, ID, Type, userType} : {children : React
             <form id = {ID} onSubmit={handleSubmit}>
                 <FormTitle>{(Type === "login")? "Se connecter" : "Créer un compte"}</FormTitle>
                 <div className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
-                    {error && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
-                    {success && <SuccessAlert>Connexion réussie!</SuccessAlert>}
+                    {error1 && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
+                    {success && <SuccessAlert>{(Type === "login")? "Connexion réussie!" : "Inscription réussie!"}</SuccessAlert>}
+                    {error2 && <ErrorAlert>Une erreur est survenue. Veuillez réessayer.</ErrorAlert>}
                     <>
                         {children}
                     </>

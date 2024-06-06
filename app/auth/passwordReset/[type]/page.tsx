@@ -11,7 +11,8 @@ import SuccessAlert from "@/components/SuccessAlert";
 
 
 function PasswordReset () {
-    const [error, setError] = useState(false);
+    const [error1, setError1] = useState(false);
+    const [error2, setError2] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const router = useRouter();
@@ -32,7 +33,7 @@ function PasswordReset () {
         // Je vérifie si le mail existe dans ma base de donnée et si c'est le cas je change le password et j'envoie le mail
         // Sinon, je montre une erreur et je demande me montrer un mail valide
         // Tout ca se fait du côté serveur
-        const infos = { mail, type };
+        const infos = { type, mail };
 
         // Faire une requête update
 
@@ -49,7 +50,8 @@ function PasswordReset () {
                 <div className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
                     <p className="mt-2">Veuillez entrer votre adresse mail. Un message vous sera envoyé avec un nouveau mot de passe temporaire.</p>
                     <p className="mt-2">Utilisez le pour vous connecter et n&apos;oubliez pas de le modifier dans votre profil.</p>
-                    {error && <ErrorAlert>Aucun utilisateur avec un tel email! Veuillez entrer un mail valide ou vérifiez que vous êtes effectivement un {(type === "pat")? "patient" : (type === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
+                    {error1 && <ErrorAlert>Aucun utilisateur avec un tel email! Veuillez entrer un mail valide ou vérifiez que vous êtes effectivement un {(type === "pat")? "patient" : (type === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
+                    {error2 && <ErrorAlert>Une erreur est survenue. Veuillez réessayer.</ErrorAlert>}
                     {success && <SuccessAlert>Email envoyé avec succès!</SuccessAlert>}
                     <Input Type="email" Placeholder="Adresse e-mail" Label="Email" ID="mail" />
                     <Button type="submit" Form="passwordReset">Envoyer le code</Button>

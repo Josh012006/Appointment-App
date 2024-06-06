@@ -53,8 +53,8 @@ function SignUp() {
             <div>
                 <label className="my-3 font-bold">Sexe</label>
                 <div className="grid grid-cols-2">
-                    <label htmlFor = "male" className="flex items-center justify-center col-span-1 my-3"><input id = "male" type = "radio" name = "genderM" value = "male" checked = {gender.male} onClick = {() => {setGender({male: true, female: false})}} /> Masculin</label>
-                    <label htmlFor = "female" className="flex items-center justify-center col-span-1 my-3"><input id = "female" type = "radio" name = "genderF" value = "female" checked = {gender.female} onClick = {() => {setGender({male: false, female: true})}} /> Féminin</label>
+                    <label htmlFor = "male" className="flex items-center justify-center col-span-1 my-3"><input id = "male" type = "radio" name = "genderM" value = {`${gender.male}`} checked = {gender.male} onClick = {() => {setGender({male: true, female: false})}} /> Masculin</label>
+                    <label htmlFor = "female" className="flex items-center justify-center col-span-1 my-3"><input id = "female" type = "radio" name = "genderF" value = {`${gender.female}`} checked = {gender.female} onClick = {() => {setGender({male: false, female: true})}} /> Féminin</label>
                 </div>
             </div>} {/* Mettre ici les radio pour choisir le sexe si c'est un médecin */}
 
