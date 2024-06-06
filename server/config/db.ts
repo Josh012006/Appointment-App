@@ -1,13 +1,22 @@
-// lib/db.ts
-import mysql from 'mysql2/promise';
+import mongoose from "mongoose";
 
 
-// Créez une connexion à la base de données
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: process.env.DATABASE_PASSWORD,
-    database: 'appointment',
-});
+let isConnected = false;
 
-export default pool;
+export default async function connectDB() {
+    mongoose.set('strictQuery', true); // Permet de s'assurer que les requêtes respectent le format des models.
+
+    if(!process.env.MONGO_URI) return console.log('MONGO_URI required');
+    if(isConnected) return console.log("Already connected!");
+
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+
+        isConnected = true;
+
+        console.log("Connected to database!")
+    } catch (error) {
+        console.log(error)
+    }
+
+};

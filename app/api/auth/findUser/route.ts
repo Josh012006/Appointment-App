@@ -1,32 +1,42 @@
-import { NextApiResponse } from 'next';
-import { NextRequest } from 'next/server';
+import { NextRequest} from 'next/server';
 
-import pool from '@/server/config/db';
+import connectDB from '@/server/config/db';
+import mongoose from 'mongoose';
+
+const patientModel = mongoose.model('patient');
+const secretaryModel = mongoose.model('secretary');
+const doctorModel = mongoose.model('doctor');
 
 
 
-export async function POST(req: NextRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
     try {
-        const {type, mail} = await req.json();
+        const {type, fields} = await req.json();
+        console.log({type, fields});
 
-        const connection = await pool.getConnection();
+        await connectDB();
         console.log("Connected to the database!");
 
-        const [rows, fields] = await connection.execute('SELECT * FROM users WHERE email = ? AND type = ?', [mail, type]);
+        let result;
 
-        if(Array.isArray(rows)) {
-            if(rows.length === 0) {
-                res.status(404).json({})
-            }
-            else {
-                res.status(200).json(rows[0]);
-            }
+        if(type === "pat") {
+            result = await patientModel.findOne({ ...fields });
+        }
+        else if(type === "sec") {
+            result = await secretaryModel.findOne({ ...fields });
+        }
+        else if(type === "med") {
+            result = await doctorModel.findOne({ ...fields });
+        }
+
+        if(result === null) {
+            return Response.json({message: 'User not found!'}, {status: 404});
         }
         else {
-            throw Error('Une erreur interne est survenue avec le findUser!')
+            return Response.json(JSON.stringify(result), {status: 200});
         }
 
     } catch(error) {
-        res.status(500).json(error);
+        return Response.json({message: 'Problem with findUser'+ error}, {status: 500});
     }
 }

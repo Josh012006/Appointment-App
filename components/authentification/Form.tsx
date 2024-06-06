@@ -16,7 +16,7 @@ export default function Form ({children, ID, Type, userType} : {children : React
     const [error2, setError2] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    interface User {
+    interface UserFetched {
         type: string;
         lastName: FormDataEntryValue | null;
         firstName: FormDataEntryValue | null;
@@ -55,7 +55,7 @@ export default function Form ({children, ID, Type, userType} : {children : React
             const firstName = formData.get("prenom");
             const phone = formData.get("telephone");
 
-            const infos: User = {type: userType, lastName, firstName, mail, password, phone};
+            const infos: UserFetched = {type: userType, lastName, firstName, mail, password, phone};
 
             if(userType === "pat") {
                 infos.region = formData.get("region");

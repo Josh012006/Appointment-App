@@ -1,35 +1,48 @@
-import { NextApiResponse } from 'next';
 import { NextRequest } from 'next/server';
+
+import connectDB from '@/server/config/db';
+
 import nodemailer from 'nodemailer';
-
-import pool from '@/server/config/db';
 import axios from 'axios';
+import generator from 'generate-password';
 
 
 
 
-export async function UPDATE(req: NextRequest, res: NextApiResponse) {
+export async function PATCH(req: NextRequest) {
 
     try {
         // Récupération du type et du mail;
         const {type, mail} = await req.json();
         console.log({type, mail});
 
-        const connection = await pool.getConnection();
-        console.log("Connected to the database!");
+        await connectDB();
 
-        const response = await axios.post('/api/auth/findUser', JSON.stringify({type, mail}));
+        // Je vérifie que l'utilisateur existe vraiment
+        const response = await axios.post('/api/auth/findUser', JSON.stringify({type, fields: { mail }}));
+
+        console.log(response.data);
+
         if(response.status === 500) {
             throw Error('Une erreur interne est survenue avec findUser!');
         }
         else if (response.status === 404) {
-            res.status(404).json('Not found!');
+            return Response.json({message: 'User not found!'}, {status: 404});
         }
         else if (response.status === 200) {
             // Générer un nouveau mot de passe
-            const generatedPassword = "";
+            
+            const generatedPassword = generator.generate({
+                length: 8,
+                numbers: true,
+                symbols: true,
+                uppercase: true,
+                lowercase: true,
+                strict: true
+            });;
 
-            // Update le mot de passe avec une route update user
+            // Update le mot de passe avec la route updateUser
+            const result = axios.patch('/api/auth/updateUser', JSON.stringify({id: response.data._id, type, newInfos: {password: generatedPassword}}))
 
             // Defining mail variables
             let transporter = nodemailer.createTransport({
@@ -53,11 +66,11 @@ export async function UPDATE(req: NextRequest, res: NextApiResponse) {
             };
     
             await transporter.sendMail(mailOptions);
-            return res.status(200).json('Email sent successfully.');
+            return Response.json({message: 'Email sent!'}, {status: 200});
         }
 
     } catch (error) {
         console.log(error);
-        return res.status(500).json(error);
+        return Response.json({message: 'Une erreur interne est survenue dans resetPassword!' + error}, {status: 500});
     }
 }
