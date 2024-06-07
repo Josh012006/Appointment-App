@@ -5,16 +5,34 @@ import Brand from "../layout/Brand";
 import SuccessAlert from "../SuccessAlert";
 import Button from "./Button";
 import FormTitle from "./FormTitle";
+
 import Link from "next/link";
 
 import { useState } from "react";
+
+import { useRouter } from "next/navigation";
+
+import axios from "axios";
+import Loader from "../Loader";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { login } from "@/redux/features/authSlice";
+import generateUniqueId from "@/server/utils/generateId";
 
 
 export default function Form ({children, ID, Type, userType} : {children : React.ReactNode, ID: string, Type: "login" | "signup", userType: string}) {
 
     const [error1, setError1] = useState(false);
     const [error2, setError2] = useState(false);
+    const [error3, setError3] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    const dispatch = useDispatch<AppDispatch>();
+
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const router = useRouter();
 
     interface UserFetched {
         type: string;
@@ -35,7 +53,13 @@ export default function Form ({children, ID, Type, userType} : {children : React
     }
 
     // Gérer la soumission avec une requête
-    const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+
+        setSuccess(false);
+        setError1(false);
+        setError2(false);
+        setError3(false);
+
         e.preventDefault();
 
         const form = e.target as HTMLFormElement;
@@ -44,38 +68,128 @@ export default function Form ({children, ID, Type, userType} : {children : React
         const mail = formData.get("mail");
         const password = formData.get("password");
 
-        if(Type === "login") {
+        
+        try {
+            if(Type === "login") {
 
-            const infos = { type:userType, mail, password };
+                const infos = { type:userType, mail, password };
 
-            // Faire une requête vers la route de connexion et faire la redirection si c'est réussie avec un delay
-        }
-        else {
-            const lastName = formData.get("nom");
-            const firstName = formData.get("prenom");
-            const phone = formData.get("telephone");
+                // Je le redirige vers le haut de la page pour qu'il puisse voir les messages
+                router.push(`/auth/login/${userType}/#formDiv`);
 
-            const infos: UserFetched = {type: userType, lastName, firstName, mail, password, phone};
+                setIsLoading(true);
 
-            if(userType === "pat") {
-                infos.region = formData.get("region");
+                // Faire une requête vers la route de connexion et faire la redirection si c'est réussie avec un delay
+                const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({type: userType, fields: {mail: infos.mail, password: infos.password}}), {
+                    validateStatus: (status: number): boolean => { return status >= 200 }
+                }); 
+
+                if(searchRes.status === 500) {
+                    setIsLoading(false);
+                    setError2(true);
+                }
+                else if(searchRes.status === 404) {
+                    setIsLoading(false);
+                    setError1(true);
+                }
+                else if(searchRes.status === 200) {
+                    setIsLoading(false);
+                    setSuccess(true);
+                    // Un petit delay pour permettre la lecture du message de succès avant la redirection
+                    setTimeout(() => {
+                        setIsLoading(true);
+                    }, 1000);
+
+                    dispatch(login(searchRes.data));
+
+                    setTimeout(() => {
+                        setIsLoading(false);
+                        router.push('/userpage');
+                    }, 2000);
+                }
             }
             else {
 
-                infos.hospital = formData.get("hospital");
+                // Je le redirige vers le haut de la page pour qu'il puisse voir les messages
+                router.push(`/auth/signUp/${userType}/#formDiv`);
 
-                if(userType === "sec") {
-                    infos.medID = formData.get("medID");
+                setIsLoading(true);
+
+                const lastName = formData.get("nom");
+                const firstName = formData.get("prenom");
+                const phone = formData.get("telephone");
+
+                const infos: UserFetched = {type: userType, lastName, firstName, mail, password, phone};
+
+                if(userType === "pat") {
+                    infos.region = formData.get("region");
                 }
                 else {
-                    infos.speciality = formData.get("speciality");
 
-                    const male = Boolean(formData.get("genderM"));
-                    infos.gender = (male)? "male" : "female";
+                    infos.hospital = formData.get("hospital");
+
+                    if(userType === "sec") {
+                        infos.medID = formData.get("medID");
+                    }
+                    else {
+
+                        // Génération d'un medID utilisé par la secrétaire.
+                        const newId = generateUniqueId();
+                        infos.medID = newId;
+
+                        infos.speciality = formData.get("speciality");
+
+                        const male = Boolean(formData.get("genderM"));
+                        infos.gender = (male)? "male" : "female";
+                    }
                 }
-            }
 
-            // Faire une requête pour ajouter l'utilisateur et le rediriger si c'est réussi
+                // Faire une requête pour ajouter l'utilisateur et le rediriger si c'est réussi
+                const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({type: userType, fields: {mail: infos.mail}}), {
+                    validateStatus: (status: number): boolean => { return status >= 200 }
+                });
+
+                if(searchRes.status === 500) {
+                    setIsLoading(false);
+                    setError2(true);
+                }
+                else if(searchRes.status === 200) {
+                    setIsLoading(false);
+                    setError3(true);
+                }
+                else if(searchRes.status === 404) {
+                    const signUpRes = await axios.post('http://localhost:3000/api/auth/addUser', JSON.stringify(infos), {
+                        validateStatus: (status: number): boolean => { return status >= 200 }
+                    });
+
+                    if(signUpRes.status === 500) {
+                        setIsLoading(false);
+                        setError2(true);
+                    }
+
+                    else if(signUpRes.status === 200) {
+                        setIsLoading(false);
+                        setSuccess(true);
+                        // Un petit delay pour permettre la lecture du message de succès avant la redirection
+                        setTimeout(() => {
+                            setIsLoading(true);
+                        }, 1000);
+
+                        dispatch(login(infos));
+
+                        setTimeout(() => {
+                            setIsLoading(false);
+                            router.push('/userpage');
+                        }, 2000);
+                    }
+
+                }
+
+            }
+        } catch(error) {
+            console.log(error);
+            setIsLoading(false);
+            setError2(true);
         }
     }
 
@@ -84,10 +198,12 @@ export default function Form ({children, ID, Type, userType} : {children : React
             <Brand />
             <form id = {ID} onSubmit={handleSubmit}>
                 <FormTitle>{(Type === "login")? "Se connecter" : "Créer un compte"}</FormTitle>
-                <div className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
-                    {error1 && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
-                    {success && <SuccessAlert>{(Type === "login")? "Connexion réussie!" : "Inscription réussie!"}</SuccessAlert>}
-                    {error2 && <ErrorAlert>Une erreur est survenue. Veuillez réessayer.</ErrorAlert>}
+                <div id="formDiv" className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
+                    {isLoading && <Loader color="#36d7b7" size={40} />}
+                    {error1 && !error2 && !success && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
+                    {success && !error1 && !error2 && <SuccessAlert>{(Type === "login")? "Connexion réussie!" : "Inscription réussie!"}</SuccessAlert>}
+                    {error2 && !error1 && !success && <ErrorAlert>Une erreur interne est survenue. Veuillez réessayer.</ErrorAlert>}
+                    {error3 && !error1 && !success && <ErrorAlert>Un tel utilisateur existe déjà! Veuillez vous connecter ou changer d&apos;informations!</ErrorAlert>}
                     <>
                         {children}
                     </>

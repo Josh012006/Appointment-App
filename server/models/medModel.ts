@@ -5,6 +5,7 @@ import userModel from './userModel';
 
 const doctorSchema = new mongoose.Schema({
     hospital: String,
+    medID: String,
     speciality: [String]
 });
 
