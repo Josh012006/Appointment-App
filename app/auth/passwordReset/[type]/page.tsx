@@ -37,7 +37,9 @@ function PasswordReset () {
             const infos = { type, mail };
 
             // Faire une requête resetPassword
-            const response = await axios.patch('/api/auth/resetPassword', JSON.stringify(infos));
+            const response = await axios.patch('http://localhost:3000/api/auth/resetPassword', JSON.stringify(infos), {
+                validateStatus: (status: number): boolean => { return status >= 200 }
+            });
 
             if(response.status === 404) {
                 setError1(true);
@@ -53,7 +55,7 @@ function PasswordReset () {
                 // Un petit delay pour permettre la lecture du message de succès avant la redirection
                 setTimeout(() => {
                     router.push(`/auth/login/${type}`);
-                }, 4000);
+                }, 2000);
             }         
 
         } catch (error) {

@@ -1,11 +1,11 @@
 import { NextRequest} from 'next/server';
 
 import connectDB from '@/server/config/db';
-import mongoose from 'mongoose';
 
-const patientModel = mongoose.model('patient');
-const secretaryModel = mongoose.model('secretary');
-const doctorModel = mongoose.model('doctor');
+
+import patientModel from '@/server/models/patModel';
+import secretaryModel from '@/server/models/secModel';
+import doctorModel from '@/server/models/medModel';
 
 
 
@@ -15,15 +15,16 @@ export async function POST(req: NextRequest) {
         console.log({type, fields});
 
         await connectDB();
-        console.log("Connected to the database!");
 
-        let result;
+        let result = null;
 
         if(type === "pat") {
             result = await patientModel.findOne({ ...fields });
         }
         else if(type === "sec") {
+            console.log({...fields});
             result = await secretaryModel.findOne({ ...fields });
+            console.log(result);
         }
         else if(type === "med") {
             result = await doctorModel.findOne({ ...fields });
@@ -33,10 +34,10 @@ export async function POST(req: NextRequest) {
             return Response.json({message: 'User not found!'}, {status: 404});
         }
         else {
-            return Response.json(JSON.stringify(result), {status: 200});
+            return Response.json(result, {status: 200});
         }
 
     } catch(error) {
-        return Response.json({message: 'Problem with findUser'+ error}, {status: 500});
+        return Response.json({message: 'Problem with findUser! '+ error}, {status: 500});
     }
 }

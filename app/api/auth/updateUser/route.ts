@@ -3,11 +3,10 @@ import { NextRequest } from 'next/server';
 
 import connectDB from '@/server/config/db';
 
-import mongoose from 'mongoose';
 
-const patientModel = mongoose.model('patient');
-const secretaryModel = mongoose.model('secretary');
-const doctorModel = mongoose.model('doctor');
+import patientModel from '@/server/models/patModel';
+import secretaryModel from '@/server/models/secModel';
+import doctorModel from '@/server/models/medModel';
 
 
 export async function PATCH(req: NextRequest, res: NextApiResponse) {
@@ -15,7 +14,6 @@ export async function PATCH(req: NextRequest, res: NextApiResponse) {
         const { id, type, newInfos } = await req.json();
 
         await connectDB();
-        console.log("Connected to the database!");
 
         let result;
 
@@ -23,6 +21,7 @@ export async function PATCH(req: NextRequest, res: NextApiResponse) {
             result = await patientModel.findByIdAndUpdate(id, {...newInfos}, { new: true });
         }
         else if(type === "sec") {
+            console.log(id);
             result = await secretaryModel.findByIdAndUpdate(id, {...newInfos}, { new: true });
         }
         else if(type === "med") {
@@ -33,10 +32,10 @@ export async function PATCH(req: NextRequest, res: NextApiResponse) {
             return Response.json({message: 'User not found!'}, {status: 404});
         }
         else {
-            return Response.json(JSON.stringify(result), {status: 200});
+            return Response.json(result, {status: 200});
         }
 
     } catch(error) {
-        return Response.json({message: 'Problem with updateUser'+ error}, {status: 500});
+        return Response.json({message: 'Problem with updateUser! '+ error}, {status: 500});
     }
 }
