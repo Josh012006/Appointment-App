@@ -3,9 +3,9 @@ import { NextRequest} from 'next/server';
 import connectDB from '@/server/config/db';
 
 
-import patientModel from '@/server/models/patModel';
-import secretaryModel from '@/server/models/secModel';
-import doctorModel from '@/server/models/medModel';
+import patientModel from '@/server/models/users/patModel';
+import secretaryModel from '@/server/models/users/secModel';
+import doctorModel from '@/server/models/users/medModel';
 
 
 

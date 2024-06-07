@@ -54,6 +54,7 @@ function SignUp() {
         }
     }, [medIDValue]);
 
+
     useEffect(() => {
         if(!errorP || !errorPC || !errorMedID) {
             setIsValid(false);
@@ -69,7 +70,7 @@ function SignUp() {
     const myType = (typeof type !== "string")? "pat" : type;
 
     return(
-        <Form Type="signup" ID = "signUpForm" userType={myType} isValid = {true}>
+        <Form Type="signup" ID = "signUpForm" userType={myType} isValid = {IsValid}>
             <Input Type="text" Placeholder="Nom" Label="Nom" ID="nom" />
             <Input Type="text" Placeholder="Prénom" Label="Prénom" ID="prenom" />
 
@@ -118,7 +119,7 @@ function SignUp() {
             {type === "med" && <Input Type="text" Placeholder="Médecine générale ou Pédiatrie-Psychiatrie" Label="Spécialité (s)" ID="speciality" />}
 
             {(type === "med" || type === "sec") && <br />}
-            <PhoneBlock />
+            <PhoneBlock SetIsValid = {setIsValid} />
         </Form>
     );
 }

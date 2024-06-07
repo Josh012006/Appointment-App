@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import userModel from './userModel';
+import userModel from './users/userModel';
 
 const patientSchema = new mongoose.Schema({
     region: String,

@@ -2,10 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ErrorAlert from "../ErrorAlert";
 
 
-function PhoneBlock () {
+function PhoneBlock ({SetIsValid} : {SetIsValid: (b : boolean) => void}) {
     const [phone, setPhone] = useState('');
+    const [errorPhone, setErrorPhone] = useState(false);
+
+
 
     useEffect(() => {
         let phoneNumber = phone.replace(/\D/g, ''); // Supprime tous les caractères non numériques
@@ -23,10 +27,30 @@ function PhoneBlock () {
             }
         }
         setPhone(formattedPhoneNumber.trim());
-    }, [phone])
+
+        // Si la longueur de la valeur inférieur à 12 caractères montrer une erreur
+        if (phone.length < 12 && phone.length !== 0) {
+            setErrorPhone(true);
+        }
+        else {
+            setErrorPhone(false);
+        }
+    }, [phone]);
+
+
+    useEffect(() => {
+        if(errorPhone) {
+            SetIsValid(false);
+        }
+        else {
+            SetIsValid(true);
+        }
+    }, [errorPhone, SetIsValid]);
+    
 
     return(
         <>
+            {errorPhone && <ErrorAlert>Entrez un numéro de téléphone valide!</ErrorAlert>}
             <label htmlFor = "telephone" className="my-3 font-bold">Téléphone</label>
             <div className="grid grid-cols-10 items-center">
                 <span className="flex items-center justify-center col-span-3 h-12 bg-white px-1 mr-2 border-2 border-black rounded-lg">
