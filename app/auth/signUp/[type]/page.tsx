@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 
 function verifyPassword(password : string) : boolean {
-    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/g;
+    let pattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/g;
     return ((pattern.test(password)) || (password === ''));
 }
 
@@ -24,7 +24,12 @@ function SignUp() {
     const [gender, setGender] = useState({male: true, female: false});
     const [errorP, setErrorP] = useState(false);
     const [errorPC, setErrorPC] = useState(false);
+    const [errorMedID, setErrorMedID] = useState(false);
     const [password, setPassword] = useState('');
+
+    const [IsValid, setIsValid] = useState(true);
+
+    const [medIDValue, setMedIDValue] = useState('');
 
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -39,13 +44,32 @@ function SignUp() {
         setErrorPC(bool2);
     }, [password, passwordConfirm]);
 
+    useEffect(() => {
+        // Si la longueur de la valeur dépasse 10 ou est inférieur à 10 caractères montrer une erreur
+        if (medIDValue.length !== 10 && medIDValue.length !== 0) {
+            setErrorMedID(true);
+        }
+        else {
+            setErrorMedID(false);
+        }
+    }, [medIDValue]);
+
+    useEffect(() => {
+        if(!errorP || !errorPC || !errorMedID) {
+            setIsValid(false);
+        }
+        else {
+            setIsValid(true);
+        }
+    }, [errorP, errorPC, errorMedID]);
+
 
     const params = useParams();
     const type = params.type;
     const myType = (typeof type !== "string")? "pat" : type;
 
     return(
-        <Form Type="signup" ID = "signUpForm" userType={myType}>
+        <Form Type="signup" ID = "signUpForm" userType={myType} isValid = {true}>
             <Input Type="text" Placeholder="Nom" Label="Nom" ID="nom" />
             <Input Type="text" Placeholder="Prénom" Label="Prénom" ID="prenom" />
 
@@ -53,8 +77,8 @@ function SignUp() {
             <div>
                 <label className="my-3 font-bold">Sexe</label>
                 <div className="grid grid-cols-2">
-                    <label htmlFor = "male" className="flex items-center justify-center col-span-1 my-3"><input id = "male" type = "radio" name = "genderM" value = {`${gender.male}`} checked = {gender.male} onClick = {() => {setGender({male: true, female: false})}} /> Masculin</label>
-                    <label htmlFor = "female" className="flex items-center justify-center col-span-1 my-3"><input id = "female" type = "radio" name = "genderF" value = {`${gender.female}`} checked = {gender.female} onClick = {() => {setGender({male: false, female: true})}} /> Féminin</label>
+                    <label htmlFor = "male" className="flex items-center justify-center col-span-1 my-3"><input id = "male" type = "radio" name = "genderM" value = {`${gender.male}`} checked = {gender.male} onChange = {() => {setGender({male: true, female: false})}} /> Masculin</label>
+                    <label htmlFor = "female" className="flex items-center justify-center col-span-1 my-3"><input id = "female" type = "radio" name = "genderF" value = {`${gender.female}`} checked = {gender.female} onChange = {() => {setGender({male: false, female: true})}} /> Féminin</label>
                 </div>
             </div>} {/* Mettre ici les radio pour choisir le sexe si c'est un médecin */}
 
@@ -84,7 +108,13 @@ function SignUp() {
             {type === "pat" && <Select ID="region" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
             {(type === "med" || type === "sec") && <Select ID="hospital" Placeholder="Hôpital Principal de Dakar par exemple" Label="Etablissement médical" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
             
-            {type === "sec" && <Input Type="text" Placeholder="0123456789" Label="ID du Médecin" ID="medID" />}
+            {(type === "sec") && 
+            <>
+                {errorMedID && <ErrorAlert>Cet identifiant doit contenir exactement dix chiffres.</ErrorAlert>}
+                <label htmlFor = "medID" className="my-3 font-bold">ID du Médecin</label>
+                <input id="medID" name="medID" placeholder="0123456789" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black" value={medIDValue} onChange={(ev) => {setMedIDValue(ev.target.value);}} />
+            </>}
+
             {type === "med" && <Input Type="text" Placeholder="Médecine générale ou Pédiatrie-Psychiatrie" Label="Spécialité (s)" ID="speciality" />}
 
             {(type === "med" || type === "sec") && <br />}
