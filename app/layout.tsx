@@ -1,5 +1,6 @@
 // import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
+import Problem from "@/components/Problem";
 import "./globals.css";
 import ReduxProvider from "@/redux/Provider";
 
@@ -23,7 +24,10 @@ export default function RootLayout({
       </head>
       <body>
         <ReduxProvider>
-          {children}
+          <>
+            {children}
+            <Problem />
+          </>
         </ReduxProvider>
       </body>
     </html>

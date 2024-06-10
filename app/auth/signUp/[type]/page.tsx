@@ -5,6 +5,7 @@ import Input from "@/components/authentification/Input";
 import PhoneBlock from "@/components/authentification/PhoneBlock";
 import Select from "@/components/authentification/Select";
 import ErrorAlert from "@/components/ErrorAlert";
+import generateHospitalTab from "@/server/utils/generateHospitalTab";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -25,7 +26,10 @@ function SignUp() {
     const [errorP, setErrorP] = useState(false);
     const [errorPC, setErrorPC] = useState(false);
     const [errorMedID, setErrorMedID] = useState(false);
+    const [errorHospital, setHospitalError] = useState(false);
     const [password, setPassword] = useState('');
+
+    const [hospitalTab, setHospitalTab] = useState<string[]>([]);
 
     const [IsValid, setIsValid] = useState(true);
 
@@ -56,13 +60,28 @@ function SignUp() {
 
 
     useEffect(() => {
-        if(!errorP || !errorPC || !errorMedID) {
-            setIsValid(false);
-        }
-        else {
+        if(!errorP || !errorPC || !errorMedID || !errorHospital) {
             setIsValid(true);
         }
-    }, [errorP, errorPC, errorMedID]);
+        else {
+            setIsValid(false);
+        }
+    }, [errorP, errorPC, errorMedID, errorHospital]);
+
+    useEffect(() => {
+        async function fetchHospital() {
+            const myTab = await generateHospitalTab();
+
+            if(myTab === undefined || myTab.length === 0) {
+                setHospitalError(true);
+            }
+            else {
+                setHospitalTab(myTab);
+            }
+        }
+
+        fetchHospital();
+    }, [])
 
 
     const params = useParams();
@@ -107,7 +126,12 @@ function SignUp() {
             <br />
 
             {type === "pat" && <Select ID="region" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
-            {(type === "med" || type === "sec") && <Select ID="hospital" Placeholder="Hôpital Principal de Dakar par exemple" Label="Etablissement médical" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
+            {(type === "med" || type === "sec") && 
+            <>
+                {errorHospital && <ErrorAlert>Un problème est intervenu avec la recherche des hôpitaux! Veuillez rafraichir la page. Si le problème persiste, veuillez contacter le service client.</ErrorAlert>}
+                <Select ID="hospital" Placeholder="Hôpital Principal de Dakar par exemple" Label="Etablissement médical" optionsTab={hospitalTab} />
+            </>
+            }
             
             {(type === "sec") && 
             <>

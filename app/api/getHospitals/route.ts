@@ -12,7 +12,10 @@ export async function GET (req: NextRequest, res: NextApiResponse) {
         const response = await hospitalModel.find({});
 
         if(response === null) {
-            return Response.json({message: 'No hospital saved!'}, {status: 404});
+            return Response.json({message: 'Un problème interne est intervenu.'}, {status: 500});
+        }
+        else if(response.length === 0) {
+            return Response.json(response, {status: 404});
         }
         else {
             return Response.json(response, {status: 200});

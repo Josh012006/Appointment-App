@@ -9,13 +9,15 @@ import patientModel from '@/server/models/users/patModel';
 import secretaryModel from '@/server/models/users/secModel';
 import doctorModel from '@/server/models/users/medModel';
 
+import axios from 'axios';
+
 
 
 export async function POST(req: NextRequest) {
     try {
         const {type, ...rest} = await req.json();
         const user = {type, ...rest};
-        console.log({type, ...rest});
+        console.log(user);
 
         await connectDB();
 
@@ -32,18 +34,26 @@ export async function POST(req: NextRequest) {
         else if(type === "med") {
             const newUser = await new doctorModel(user);
             result = await newUser.save();
+
+            const addingToHospital = await axios.patch('http://localhost:3000/api/auth/addDoctorToHospital', JSON.stringify({ hospitalName: result.hospital , doctorID: result._id }), { validateStatus: status => status >= 200 });
+
+            if(addingToHospital.status !== 200) {
+                return Response.json({message: 'Error while adding doctor to hospital!'}, {status: 500});
+            }
         }
 
 
-        return Response.json(JSON.stringify(result), {status: 200});
+        return Response.json(result, {status: 200});
 
     } catch(error) {
         if(error instanceof MongooseError) {
             if (error.name === 'ValidationError') {
-            return Response.json({message: 'Validation error in addUser! '+ error.message}, {status: 500});
+            return Response.json({message: 'Validation error in addUser! ' + error.message}, {status: 500});
             } else {
-                return Response.json({message: 'Database error in addUser! '+ error.message}, {status: 500});
+                return Response.json({message: 'Database error in addUser! ' + error.message}, {status: 500});
             }
         }
+
+        return Response.json({message: 'An error while adding user! ' + error}, {status: 500});
     }
 }

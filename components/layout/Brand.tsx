@@ -11,7 +11,7 @@ export default function Brand () {
 
     return (
         <div className="flex flex-col items-center justify-center m-8">
-            <Image src="/logo.png" alt="logo" width="32" height="32" onClick={() => {router.push('/')}} />
+            <Image className="cursor-pointer" src="/logo.png" alt="logo" width="32" height="32" onClick={() => {router.push('/')}} />
             <h1 style={{fontSize:'20px', fontWeight: 'bold', margin: '8px'}}>Health Appointment</h1>
         </div>
     )

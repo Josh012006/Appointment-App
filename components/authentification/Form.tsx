@@ -18,6 +18,9 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { login } from "@/redux/features/authSlice";
 import generateUniqueId from "@/server/utils/generateId";
+import { hashPassword, verifyPassword } from "@/server/utils/hashPassword";
+
+
 
 
 export default function Form ({children, ID, Type, userType, isValid} : {children : React.ReactNode, ID: string, Type: "login" | "signup", userType: string, isValid: boolean}) {
@@ -63,6 +66,8 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
         setError3(false);
         setError4(false);
         setIsLoading(true);
+
+        console.log(isValid);
     
         if (isValid) {
             const form = e.target as HTMLFormElement;
@@ -85,9 +90,11 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
     };
     
     const handleLogin = async ({ mail, password } : {mail: FormDataEntryValue | null, password: FormDataEntryValue | null}) => {
+
         const infos = { type: userType, mail, password };
         router.push(`/auth/login/${userType}/#formDiv`);
-        const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({ type: userType, fields: { mail: infos.mail, password: infos.password } }), { validateStatus: status => status >= 200 });
+
+        const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { validateStatus: status => status >= 200 });
     
         if (searchRes.status === 500) {
             setIsLoading(false);
@@ -96,13 +103,21 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
             setIsLoading(false);
             setError1(true);
         } else if (searchRes.status === 200) {
-            setIsLoading(false);
-            setSuccess(true);
-            dispatch(login(searchRes.data));
-            setTimeout(() => {
+            const isEqual : boolean = await verifyPassword(infos.password, searchRes.data.password);
+
+            if(!isEqual) {
                 setIsLoading(false);
-                router.push('/userpage');
-            }, 2000);
+                setError1(true);
+            }
+            else {
+                setIsLoading(false);
+                setSuccess(true);
+                dispatch(login(searchRes.data));
+                setTimeout(() => {
+                    setIsLoading(false);
+                    router.push('/userpage');
+                }, 2000);
+            }
         }
     };
     
@@ -111,7 +126,20 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
         const lastName = formData.get("nom");
         const firstName = formData.get("prenom");
         const phone = formData.get("telephone");
-        const infos: UserFetched = { type: userType, lastName, firstName, mail, password, phone };
+
+        let pt = '';
+
+        if ((password) === null) {
+            pt = '';
+            throw Error("Une erreur interne est survenue! Veuillez réessayer!");
+        }
+        else {
+            pt = password.toString();
+        }
+
+        const testPassword = await hashPassword(pt);
+
+        const infos: UserFetched = { type: userType, lastName, firstName, mail, password: testPassword, phone };
     
         if (userType === "pat") {
             infos.region = formData.get("region");

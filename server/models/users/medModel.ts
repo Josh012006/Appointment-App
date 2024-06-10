@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import userModel from './users/userModel';
+import userModel from './userModel';
 
 
 const doctorSchema = new mongoose.Schema({

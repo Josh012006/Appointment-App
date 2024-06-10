@@ -5,6 +5,7 @@ import connectDB from '@/server/config/db';
 import nodemailer from 'nodemailer';
 import axios from 'axios';
 import generator from 'generate-password';
+import { hashPassword } from '@/server/utils/hashPassword';
 
 
 
@@ -46,9 +47,10 @@ export async function PATCH(req: NextRequest) {
 
             console.log(generatedPassword);
 
+            const hashedPassword = await hashPassword(generatedPassword);
 
             // Update le mot de passe avec la route updateUser
-            const result = await axios.patch('http://localhost:3000/api/auth/updateUser', JSON.stringify({id: response.data._id, type, newInfos: {password: generatedPassword}}), {
+            const result = await axios.patch('http://localhost:3000/api/auth/updateUser', JSON.stringify({id: response.data._id, type, newInfos: {password: hashedPassword}}), {
                 validateStatus: (status: number): boolean => { return status >= 200 }
             });
 

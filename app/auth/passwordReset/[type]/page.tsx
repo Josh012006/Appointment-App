@@ -15,6 +15,8 @@ import axios from "axios";
 
 import Loader from "@/components/Loader";
 
+import Link from "next/link";
+
 
 function PasswordReset () {
     const [error1, setError1] = useState(false);
@@ -100,6 +102,7 @@ function PasswordReset () {
                     {success && !error1 && !error2 && <SuccessAlert>Email envoyé avec succès!</SuccessAlert>}
                     <Input Type="email" Placeholder="Adresse e-mail" Label="Email" ID="mail" />
                     <Button type="submit" Form="passwordReset">Envoyer le code</Button>
+                    <p className="mt-2 mb-8">Retourner à la page de connexion. <Link className = "colored no-underline" href={`/auth/login/${type}`}>Connectez-vous!</Link></p>
                 </div>
             </form>
         </>
