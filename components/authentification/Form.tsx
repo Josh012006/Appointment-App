@@ -115,7 +115,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                 dispatch(login(searchRes.data));
                 setTimeout(() => {
                     setIsLoading(false);
-                    router.push('/userpage');
+                    router.push(`/userpage/${userType}`);
                 }, 2000);
             }
         }
@@ -189,7 +189,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                 dispatch(login(infos));
                 setTimeout(() => {
                     setIsLoading(false);
-                    router.push('/userpage');
+                    router.push(`/userpage/${userType}`);
                 }, 2000);
             }
         }

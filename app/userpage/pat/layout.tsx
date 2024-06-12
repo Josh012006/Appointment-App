@@ -1,6 +1,8 @@
 
-import "./globals.css";
+import Problem from "@/components/Problem";
+import Profile from "@/components/userPages/Profile";
 import ReduxProvider from "@/redux/Provider";
+
 
 
 
@@ -17,7 +19,10 @@ export default function RootLayout({
       </head>
       <body>
         <ReduxProvider>
-          {children}
+          <>
+            <Profile UserType="pat" />
+            {children}
+          </>
         </ReduxProvider>
       </body>
     </html>

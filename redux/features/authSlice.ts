@@ -18,7 +18,7 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        logout: (state, action) => {
+        logout: () => {
             // Détruire le cookie lors de la déconnexion
             Cookies.remove('user');
 
@@ -47,6 +47,6 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout, login } = authSlice.actions;
+export const { logout, login, loadUserFromCookie } = authSlice.actions;
 
 export default authSlice.reducer;
