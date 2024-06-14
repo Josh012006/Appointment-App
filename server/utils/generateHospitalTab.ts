@@ -8,7 +8,7 @@ export default async function generateHospitalTab() {
     const tab : string[] = [];
 
     try {
-        const result = await axios.get('http://localhost:3000/api/getHospitals', { validateStatus: status => status >= 200 });
+        const result = await axios.get(`${process.env.REACT_API_URL}/api/getHospitals`, { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
 
         if(result.status === 500) {
             throw Error('Une erreur interne est survene au niveau du generateHospitalTab!');

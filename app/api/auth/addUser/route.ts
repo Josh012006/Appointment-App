@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
             const newUser = await new doctorModel(user);
             result = await newUser.save();
 
-            const addingToHospital = await axios.patch('http://localhost:3000/api/auth/addDoctorToHospital', JSON.stringify({ hospitalName: result.hospital , doctorID: result._id }), { validateStatus: status => status >= 200 });
+            const addingToHospital = await axios.patch(`${process.env.REACT_API_URL}/api/auth/addDoctorToHospital`, JSON.stringify({ hospitalName: result.hospital , doctorID: result._id }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
 
             if(addingToHospital.status !== 200) {
                 return Response.json({message: 'Error while adding doctor to hospital!'}, {status: 500});

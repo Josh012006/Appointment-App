@@ -52,7 +52,7 @@ function PasswordReset () {
             const infos = { type, mail };
 
             // Faire une requête resetPassword
-            const response = await axios.patch('http://localhost:3000/api/auth/resetPassword', JSON.stringify(infos), {
+            const response = await axios.patch(`${process.env.REACT_API_URL}/api/auth/resetPassword`, JSON.stringify(infos), {
                 validateStatus: (status: number): boolean => { return status >= 200 }
             });
 

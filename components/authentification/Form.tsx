@@ -94,7 +94,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
         const infos = { type: userType, mail, password };
         router.push(`/auth/login/${userType}/#formDiv`);
 
-        const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { validateStatus: status => status >= 200 });
+        const searchRes = await axios.post(`${process.env.REACT_API_URL}/api/auth/findUser`, JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
     
         if (searchRes.status === 500) {
             setIsLoading(false);
@@ -155,7 +155,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
             }
         }
     
-        const searchRes = await axios.post('http://localhost:3000/api/auth/findUser', JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { validateStatus: status => status >= 200 });
+        const searchRes = await axios.post(`${process.env.REACT_API_URL}/api/auth/findUser`, JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
     
         if (searchRes.status === 500) {
             setIsLoading(false);
@@ -165,7 +165,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
             setError3(true);
         } else if (searchRes.status === 404) {
             if (userType === "sec") {
-                const IDverification = await axios.post('http://localhost:3000/api/auth/verifyMed', JSON.stringify({ id: infos.medID, hospital: infos.hospital }), { validateStatus: status => status >= 200 });
+                const IDverification = await axios.post(`${process.env.REACT_API_URL}/api/auth/verifyMed`, JSON.stringify({ id: infos.medID, hospital: infos.hospital }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
     
                 if (IDverification.status === 500) {
                     setIsLoading(false);
@@ -178,7 +178,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                 }
             }
     
-            const signUpRes = await axios.post('http://localhost:3000/api/auth/addUser', JSON.stringify(infos), { validateStatus: status => status >= 200 });
+            const signUpRes = await axios.post(`${process.env.REACT_API_URL}/api/auth/addUser`, JSON.stringify(infos), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
     
             if (signUpRes.status === 500) {
                 setIsLoading(false);
