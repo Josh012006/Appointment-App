@@ -21,7 +21,7 @@ export async function PATCH(req: NextRequest) {
 
 
         // Je vérifie que l'utilisateur existe vraiment
-        const response = await axios.post(`${process.env.REACT_API_URL}/api/auth/findUser`, JSON.stringify({type, fields: { mail }}), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/findUser`, JSON.stringify({type, fields: { mail }}), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
 
         console.log(response.data);
 
@@ -48,7 +48,7 @@ export async function PATCH(req: NextRequest) {
             const hashedPassword = await hashPassword(generatedPassword);
 
             // Update le mot de passe avec la route updateUser
-            const result = await axios.patch(`${process.env.REACT_API_URL}/api/auth/updateUser`, JSON.stringify({id: response.data._id, type, newInfos: {password: hashedPassword}}), {
+            const result = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/updateUser`, JSON.stringify({id: response.data._id, type, newInfos: {password: hashedPassword}}), {
                 validateStatus: (status: number): boolean => { return status >= 200 }
             });
 

@@ -52,7 +52,7 @@ function PasswordReset () {
             const infos = { type, mail };
 
             // Faire une requête resetPassword
-            const response = await axios.patch(`${process.env.REACT_API_URL}/api/auth/resetPassword`, JSON.stringify(infos), {
+            const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/resetPassword`, JSON.stringify(infos), {
                 validateStatus: (status: number): boolean => { return status >= 200 }
             });
 
@@ -101,7 +101,7 @@ function PasswordReset () {
                     {error2 && !error1 && !success && <ErrorAlert>Oops! Une erreur est survenue. Veuillez réessayer.</ErrorAlert>}
                     {success && !error1 && !error2 && <SuccessAlert>Email envoyé avec succès!</SuccessAlert>}
                     <Input Type="email" Placeholder="Adresse e-mail" Label="Email" ID="mail" />
-                    <Button type="submit" Form="passwordReset">Envoyer le code</Button>
+                    <Button type="submit" Form="passwordReset">Envoyer le message</Button>
                     <p className="mt-2 mb-8">Retourner à la page de connexion. <Link className = "colored no-underline" href={`/auth/login/${type}`}>Connectez-vous!</Link></p>
                 </div>
             </form>
