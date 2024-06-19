@@ -8,7 +8,7 @@ function Field ({Name, Href, OnClick} :  {Name: string, Href: string, OnClick: (
 
 
     return (
-        <Link href={Href} className="rounded-lg border p-1 w-full text-center my-2" style={{backgroundColor: "rgba(0, 0, 0, 0.1)"}} onClick={OnClick}>{Name}</Link>
+        <Link href={Href} className="rounded-lg border p-1 w-full text-center my-2 h-9" style={{backgroundColor: "rgba(0, 0, 0, 0.1)"}} onClick={OnClick}>{Name}</Link>
     )
 }
 

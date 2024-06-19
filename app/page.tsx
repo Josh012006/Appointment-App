@@ -21,7 +21,7 @@ export default function Home() {
       }
       else {
         const type = JSON.parse(user).type;
-        router.push(`/userpage/${type}`);
+        router.push(`/userpage/${type}/calendar`);
       }
     }, 2500)
   }, [router]);
