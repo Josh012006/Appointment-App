@@ -12,13 +12,10 @@ import { useState } from "react";
 function HeaderUsers ({UserType, SideBarFields, children} : {UserType: string, SideBarFields: any, children: React.ReactNode}) {
 
     const [showSide, setShowSide] = useState<boolean>(false);
-    const [num, setNum] = useState<number>(5);
 
 
     const handleSideToggle = () => {
         setShowSide(!showSide);
-
-        (num === 5)? setNum(4) : setNum(5);
     }
 
 
@@ -33,8 +30,8 @@ function HeaderUsers ({UserType, SideBarFields, children} : {UserType: string, S
                 <Profile UserType={UserType} />
             </header>
             <main className="grid grid-cols-5 relative"  style = {{minHeight: '606px'}}>
-                {showSide && <aside className="col-span-5 lg:col-span-1 z-30 absolute h-full w-full lg:relative"><SideBar Fields={SideBarFields} /></aside>}
-                <div className={`col-span-5 lg:col-span-${num} p-3`}>{children}</div>
+                {showSide && <div className="col-span-5 lg:col-span-1 z-30 absolute h-full w-full lg:w-auto lg:relative"><SideBar Fields={SideBarFields} /></div>}
+                <div className="col-span-5 lg:col-span-4 p-3">{children}</div>
             </main>
             <footer style = {{backgroundColor: 'var(--side_color)'}}>
                 <Problem />
