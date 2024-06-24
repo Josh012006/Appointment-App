@@ -5,10 +5,12 @@ import Field from "./Field";
 
 
 
-function SideBar ({Fields}: {Fields: any}) {
+function SideBar ({Fields, Action}: {Fields: any, Action: any}) {
 
 
-    const handleClick = () => {};
+    const handleClick = () => {
+        Action(false);
+    };
 
     return (
         <div className="w-full h-full z-50 flex flex-col px-4 py-5" style = {{backgroundColor: 'var(--side_color)'}}>

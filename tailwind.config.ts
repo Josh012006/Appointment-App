@@ -13,10 +13,15 @@ const config: Config = {
           '0%': { "opacity": "1" },
           '50%': { "opacity": "1" },
           '100%': { "opacity": "0" },
-        }
+        },
+        'border-dance': {
+          '0%, 100%': { borderColor: '#000' },
+          '50%': { borderColor: 'transparent' },
+        },
       },
       animation: {
         "fadeOut": 'fadeOut 2.5s ease-out forwards',
+        'border-dance': 'border-dance 1s infinite',
       },
     },
   },

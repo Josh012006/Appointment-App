@@ -30,8 +30,8 @@ function HeaderUsers ({UserType, SideBarFields, children} : {UserType: string, S
                 <Profile UserType={UserType} />
             </header>
             <main className="grid grid-cols-5 relative"  style = {{minHeight: '606px'}}>
-                {showSide && <div className="col-span-5 lg:col-span-1 z-30 absolute h-full w-full lg:w-auto lg:relative"><SideBar Fields={SideBarFields} /></div>}
-                <div className="col-span-5 lg:col-span-4 p-3">{children}</div>
+                {showSide && <div className="col-span-5 lg:col-span-1 z-30 absolute h-full w-full lg:w-auto lg:relative"><SideBar Fields={SideBarFields} Action={setShowSide} /></div>}
+                <div className={`col-span-5 ${showSide ? 'lg:col-span-4' : 'lg:col-span-5'}`}>{children}</div>
             </main>
             <footer style = {{backgroundColor: 'var(--side_color)'}}>
                 <Problem />
