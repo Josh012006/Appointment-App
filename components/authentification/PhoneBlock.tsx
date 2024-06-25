@@ -59,7 +59,7 @@ function PhoneBlock({ SetIsValid }: { SetIsValid: (b: boolean) => void }) {
             <div className="grid grid-cols-10 items-center">
                 <span className="flex items-center justify-center col-span-3 h-12 bg-white px-1 mr-2 border-2 border-black rounded-lg">
                     <Image src="/auth/flag.png" alt="countryFlag" width="32" height="32" className="mr-1" />
-                    <span>+221</span>
+                    <span className="hidden lg:block">+221</span>
                 </span>
                 <input
                     className="col-span-7 pl-4 h-12 rounded-lg border-2 border-solid border-black"

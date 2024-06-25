@@ -38,6 +38,30 @@ function SignUp() {
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
 
+
+
+    // Gestion de la localisation
+    const [location, setLocation] = useState('');
+    const handleAutomaticLocation = () => {
+        const successCallback = (position: GeolocationPosition) => {
+            const latitude: number = position.coords.latitude;
+            const longitude: number = position.coords.longitude;
+
+            // Créez l'URL Google Maps
+            const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            setLocation(googleMapsUrl);
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback);
+        }
+
+        
+    }
+
+
+
+
     useEffect(() => {
         const bool1 : boolean = (verifyPassword(password))? false : true;
         setErrorP(bool1);
@@ -126,6 +150,16 @@ function SignUp() {
             <br />
 
             {type === "pat" && <Select ID="region" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
+            {type === "pat" && 
+                <div className="my-3 flex flex-col">
+                    <label htmlFor = "location" className="my-3 font-bold">Votre localisation google maps</label>
+                    <p className="italic mb-3">Cette localisation aidera lors de la recherche des hôpitaux. Veuillez donc donner ou prendre la localisation à votre domicile.</p>
+                    <div className="grid grid-cols-5 items-center">
+                        <input id="location" name="location" placeholder="Votre localisation google maps" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black col-span-4" value={location} onChange = {(ev) => {setLocation(ev.target.value)}} />
+                        <div onClick={handleAutomaticLocation} style={{backgroundColor: 'var(--main_color)'}} className="text-white p-4 h-12 rounded-lg items-center flex justify-center ml-2 col-span-1 cursor-pointer"><i className="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            }
             {(type === "med" || type === "sec") && 
             <>
                 {errorHospital && <ErrorAlert>Un problème est intervenu avec la recherche des hôpitaux! Veuillez rafraichir la page. Si le problème persiste, veuillez contacter le service client.</ErrorAlert>}

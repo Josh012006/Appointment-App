@@ -200,7 +200,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
             <Brand />
             <form id = {ID} onSubmit={handleSubmit}>
                 <FormTitle>{(Type === "login")? "Se connecter" : "Créer un compte"}</FormTitle>
-                <div id="formDiv" className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
+                <div id="formDiv" className="flex flex-col m-auto w-4/5 lg:w-1/4">
                     {isLoading && <Loader color="#36d7b7" size={40} />}
                     {error1 && !error2 && !success && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
                     {success && !error1 && !error2 && <SuccessAlert>{(Type === "login")? "Connexion réussie!" : "Inscription réussie!"}</SuccessAlert>}

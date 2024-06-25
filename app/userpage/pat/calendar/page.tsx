@@ -31,11 +31,11 @@ function PatCalendar() {
 
     // Gestion du popup lors de la sélection d'un événement
     const [showPopup, setShowPopup] = React.useState<boolean>(false);
-    const [selectedEvent, setSelectedEvent] = React.useState<any>(null);
+    const [popupEvent, setPopupEvent] = React.useState<any>(null);
 
     const handleClosing = () => {  
         setShowPopup(false);
-        setSelectedEvent(null);
+        setPopupEvent(null);
     }
 
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -46,14 +46,14 @@ function PatCalendar() {
             {showPopup && <div className='absolute flex justify-center items-center w-full h-full z-50' style={{backgroundColor: 'rgba(100, 116, 139, 0.7)'}}>
                 <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 h-96'>
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosing} aria-hidden="true"></i>
-                    <h1 className="text-2xl font-bold text-center">{selectedEvent.title}</h1>
-                    <p className="text-center">{selectedEvent.start.toLocaleDateString('fr-FR', options)}</p>
-                    <p className="text-center">{selectedEvent.place}</p>
+                    <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
+                    <p className="text-center">{popupEvent.start.toLocaleDateString('fr-FR', options)}</p>
+                    <p className="text-center">{popupEvent.place}</p>
                 </div>
             </div>}
             <div>
                 <h1 className="mx-auto text-2xl font-bold text-center">Mon Calendrier</h1>
-                <MyCalendar Events={events} SetPopup={setShowPopup} eventPop={selectedEvent} SetSelected = {setSelectedEvent} />
+                <MyCalendar Events={events} SetPopup={setShowPopup} eventPop={popupEvent} SetSelected = {setPopupEvent} />
             </div>
         </>
     )
