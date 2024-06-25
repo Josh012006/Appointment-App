@@ -1,4 +1,5 @@
 export default interface User {
+    _id?: string;
     type: string;
     lastName: string;
     firstName: string;
@@ -8,6 +9,8 @@ export default interface User {
 
     region?: string;
     location?: string;
+    requests?: string[];
+    appointments?: string[];
 
     medID?: string;
 

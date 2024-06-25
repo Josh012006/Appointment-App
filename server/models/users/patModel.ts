@@ -8,6 +8,10 @@ const patientSchema = new mongoose.Schema({
     appointments: {
         type: [String],
         default: []
+    },
+    requests: {
+        type: [String],
+        default: []
     }
 });
 

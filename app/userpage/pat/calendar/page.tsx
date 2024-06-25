@@ -1,31 +1,45 @@
 "use client"
 
 import MyCalendar from '@/components/userPages/MyCalendar';
-import React, { useEffect } from 'react';
+import User from '@/interfaces/userInterface';
+import { useAppSelector } from '@/redux/store';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 
 function PatCalendar() {
 
-    const events = [
-        {
-            id: '0',
-            title: 'Meeting my beloved',
-            start: new Date(2024, 5, 20, 10, 0), // 20th June 2024, 10:00 AM
-            end: new Date(2024, 5, 20, 12, 0),   // 20th June 2024, 12:00 PM
-        },
-        {
-            id: '1',
-            title: 'Lunch Break',
-            start: new Date(2024, 5, 26, 13, 0), // 20th June 2024, 1:00 PM
-            end: new Date(2024, 5, 26, 14, 0),   // 20th June 2024, 2:00 PM
-        },
-        {
-            id: '2',
-            title: 'Appointment with Dr. House',
-            start: new Date(2024, 5, 28, 13, 0), // 20th June 2024, 1:00 PM
-            end: new Date(2024, 5, 28, 14, 0),   // 20th June 2024, 2:00 PM
-        },
-    ];
+    const [events, setEvents] = useState([]);
+
+    const user = useAppSelector(state => state.auth.infos) as User;
+
+    const router = useRouter();
+
+
+    useEffect(() => {
+        async function fetchAppointments () {
+            try {
+                const userId = user._id;
+
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/appointment/getAll`, JSON.stringify({id: userId}), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
+                
+                if(result.status !== 200) {
+                    throw Error('An error occured while fetching appointments!');
+                }
+                else {
+                    console.log(result.data);
+                    setEvents(result.data);
+                }
+
+            } catch (error) {
+                router.refresh();
+            }
+        }
+
+        fetchAppointments();
+    }, [user, router]);
+
 
 
 
@@ -46,9 +60,11 @@ function PatCalendar() {
             {showPopup && <div className='absolute flex justify-center items-center w-full h-full z-50' style={{backgroundColor: 'rgba(100, 116, 139, 0.7)'}}>
                 <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 h-96'>
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosing} aria-hidden="true"></i>
-                    <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
-                    <p className="text-center">{popupEvent.start.toLocaleDateString('fr-FR', options)}</p>
-                    <p className="text-center">{popupEvent.place}</p>
+                    <div className='my-auto'>
+                        <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
+                        <p className="text-center">{popupEvent.start.toLocaleDateString('fr-FR', options)}</p>
+                        <p className="text-center">{popupEvent.hospital}</p>
+                    </div>
                 </div>
             </div>}
             <div>

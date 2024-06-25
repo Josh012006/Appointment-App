@@ -93,7 +93,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
     const handleLogin = async ({ mail, password } : {mail: FormDataEntryValue | null, password: FormDataEntryValue | null}) => {
 
         const infos = { type: userType, mail, password };
-        router.push(`/auth/login/${userType}/#formDiv`);
+        router.push(`/auth/login/${userType}/#formTitle`);
 
         const searchRes = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/findUser`, JSON.stringify({ type: userType, fields: { mail: infos.mail } }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
     
@@ -123,7 +123,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
     };
     
     const handleSignUp = async ({ formData, mail, password } : {formData: FormData, mail: FormDataEntryValue | null, password: FormDataEntryValue | null}) => {
-        router.push(`/auth/signUp/${userType}/#formDiv`);
+        router.push(`/auth/signUp/${userType}/#formTitle`);
         const lastName = formData.get("nom");
         const firstName = formData.get("prenom");
         const phone = formData.get("telephone");

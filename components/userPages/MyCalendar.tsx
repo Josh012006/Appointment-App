@@ -73,7 +73,18 @@ function MyCalendar({Events, SetPopup, eventPop, SetSelected}: {Events: any[], S
         SetPopup(true);
     };
 
-
+    const dayPropGetter = (date: Date) => {
+        const isToday = moment().isSame(date, 'day');
+    
+        if (isToday) {
+            return {
+                style: {
+                    backgroundColor: '#36d7b777', // Couleur pour le slot de la date actuelle
+                },
+            };
+        }
+        return {};
+    };
 
 
 
@@ -101,7 +112,7 @@ function MyCalendar({Events, SetPopup, eventPop, SetSelected}: {Events: any[], S
                 onNavigate={handleNavigate}
                 eventPropGetter={(event, start, end, isSelected) => eventPropGetter(event, start, end, event === selectedEvent)}
                 popup
-
+                dayPropGetter={dayPropGetter}
                 onSelectEvent={handleSelectEvent}
                 
             />
