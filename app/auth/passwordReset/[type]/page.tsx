@@ -93,7 +93,7 @@ function PasswordReset () {
             <Brand />
             <form id="passwordReset" onSubmit={handleSubmit}>
                 <FormTitle>Mot de passe oublié</FormTitle>
-                <div className="flex flex-col m-auto" style={{maxWidth: '400px'}}>
+                <div className="flex flex-col m-auto w-4/5 lg:w-1/4">
                     <p className="mt-2">Veuillez entrer votre adresse mail. Un message vous sera envoyé avec un nouveau mot de passe temporaire.</p>
                     <p className="mt-2">Utilisez le pour vous connecter et n&apos;oubliez pas de le modifier dans votre profil.</p>
                     {isLoading && <Loader color="#36d7b7" size={40} />}

@@ -47,6 +47,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
         phone: FormDataEntryValue | null;
 
         region?: FormDataEntryValue | null;
+        location?: FormDataEntryValue | null;
 
         medID?: FormDataEntryValue | null;
 
@@ -143,6 +144,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
     
         if (userType === "pat") {
             infos.region = formData.get("region");
+            infos.location = formData.get("location");        
         } else {
             infos.hospital = formData.get("hospital");
             if (userType === "sec") {

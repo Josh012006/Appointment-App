@@ -7,6 +7,7 @@ export default interface User {
     phone: string;
 
     region?: string;
+    location?: string;
 
     medID?: string;
 

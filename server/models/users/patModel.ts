@@ -4,6 +4,7 @@ import userModel from './userModel';
 
 const patientSchema = new mongoose.Schema({
     region: String,
+    location: String,
     appointments: {
         type: [String],
         default: []
