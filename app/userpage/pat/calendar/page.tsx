@@ -52,7 +52,7 @@ function PatCalendar() {
         setPopupEvent(null);
     }
 
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
 
     return (
@@ -62,7 +62,7 @@ function PatCalendar() {
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosing} aria-hidden="true"></i>
                     <div className='my-auto'>
                         <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
-                        <p className="text-center">{popupEvent.start.toLocaleDateString('fr-FR', options)}</p>
+                        <p className="text-center">{new Date(popupEvent.start).toLocaleDateString('fr-FR', options)}</p>
                         <p className="text-center">{popupEvent.hospital}</p>
                     </div>
                 </div>

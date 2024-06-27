@@ -1,3 +1,4 @@
+import connectDB from "@/server/config/db";
 import appointmentModel from "@/server/models/appointmentModel";
 import patientModel from "@/server/models/users/patModel";
 import { NextRequest } from "next/server";
@@ -8,6 +9,8 @@ import { NextRequest } from "next/server";
 export async function POST (req: NextRequest) {
     try {
         const {id} = await req.json();
+
+        await connectDB();
 
         const user = await patientModel.findById(id);
 

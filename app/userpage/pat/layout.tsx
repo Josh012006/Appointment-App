@@ -14,7 +14,7 @@ export default function PatientLayout({
 }>) {
   return (
     <>
-      <HeaderUsers SideBarFields={{Calendrier: '/userpage/pat/calendar', Settings:'/'}} UserType="pat">
+      <HeaderUsers SideBarFields={{Calendrier: '/userpage/pat/calendar', Historique:'/userpage/pat/history', Réserver: '/userpage/pat/reservation', Demandes: '/userpage/pat/requests'}} UserType="pat">
         {children}
       </HeaderUsers>
     </>

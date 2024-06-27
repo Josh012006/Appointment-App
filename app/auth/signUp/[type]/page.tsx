@@ -27,7 +27,7 @@ function SignUp() {
     const [errorPC, setErrorPC] = useState(false);
     const [errorMedID, setErrorMedID] = useState(false);
     const [errorHospital, setHospitalError] = useState(false);
-    const [password, setPassword] = useState('');
+    
 
     const [hospitalTab, setHospitalTab] = useState<string[]>([]);
 
@@ -35,6 +35,8 @@ function SignUp() {
 
     const [medIDValue, setMedIDValue] = useState('');
 
+
+    const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
 
