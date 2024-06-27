@@ -64,6 +64,7 @@ function PatCalendar() {
                         <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
                         <p className="text-center">{new Date(popupEvent.start).toLocaleDateString('fr-FR', options)}</p>
                         <p className="text-center">{popupEvent.hospital}</p>
+                        <p className="text-center">Rendez-vous avec {popupEvent.medName} pour {popupEvent.medSpecialty}</p>
                     </div>
                 </div>
             </div>}

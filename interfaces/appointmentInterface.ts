@@ -3,4 +3,6 @@ export default interface Appointment {
     start: Date,
     end: Date,
     hospital: string,
+    medName: string,
+    medSpecialty: string,
 }
