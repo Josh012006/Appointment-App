@@ -7,25 +7,29 @@ import 'moment/locale/fr';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { Event, EventProps } from 'react-big-calendar';
+import Appointment from '@/interfaces/appointmentInterface';
 
-// Définissez l'interface de votre événement si nécessaire
-interface MyEvent extends Event {
-    type: string;
-    id: string;
-}
 
 
 moment.locale('fr');
 const localizer = momentLocalizer(moment);
 
 
+interface MyCalendarProps {
+    Events: Appointment[];
+    SetPopup: (state: boolean) => void;
+    eventPop: boolean;
+    SetSelected: (event: Appointment | null) => void;
+}
 
 
-function MyCalendar({Events, SetPopup, eventPop, SetSelected}: {Events: any[], SetPopup: any, eventPop: boolean, SetSelected: any}) {
+
+
+function MyCalendar({Events, SetPopup, eventPop, SetSelected}: MyCalendarProps) {
 
     const [view, setView] = useState<View | undefined>('month');
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedEvent, setSelectedEvent] = useState<MyEvent | null>(null);
+    const [selectedEvent, setSelectedEvent] = useState<Appointment | null>(null);
 
     const onView = useCallback((newView: any) => setView(newView), [setView]);
 
@@ -33,7 +37,7 @@ function MyCalendar({Events, SetPopup, eventPop, SetSelected}: {Events: any[], S
         setCurrentDate(date);
     };
 
-    const eventPropGetter = (event: MyEvent, start: Date, end: Date, isSelected: Boolean) => {
+    const eventPropGetter = (event: Appointment, start: Date, end: Date, isSelected: Boolean) => {
         let backgroundColor = 'green'; // Couleur par défaut
 
         // Calcul de la différence en jours

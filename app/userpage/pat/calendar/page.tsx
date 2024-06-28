@@ -1,16 +1,18 @@
 "use client"
 
 import MyCalendar from '@/components/userPages/MyCalendar';
+import Appointment from '@/interfaces/appointmentInterface';
 import User from '@/interfaces/userInterface';
 import { useAppSelector } from '@/redux/store';
 import axios from 'axios';
+import { createPostponedAbortSignal } from 'next/dist/server/app-render/dynamic-rendering';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 
 function PatCalendar() {
 
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState<Appointment[]>([]);
 
     const user = useAppSelector(state => state.auth.infos) as User;
 
@@ -29,7 +31,14 @@ function PatCalendar() {
                 }
                 else {
                     console.log(result.data);
-                    setEvents(result.data);
+                    let appointments: Appointment[] = result.data.filter((appointment: Appointment) => appointment.status === 'confirmed' && new Date(new Date(appointment.end).getTime() + 5 * 60 * 60 * 1000) >= new Date());
+
+                    appointments.forEach(appointment => {
+                        appointment.start = new Date(appointment.start);
+                        appointment.end = new Date(appointment.end);
+                    });
+                    console.log(appointments);
+                    setEvents(appointments);
                 }
 
             } catch (error) {
@@ -64,7 +73,7 @@ function PatCalendar() {
                         <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
                         <p className="text-center">{new Date(popupEvent.start).toLocaleDateString('fr-FR', options)}</p>
                         <p className="text-center">{popupEvent.hospital}</p>
-                        <p className="text-center">Rendez-vous avec {popupEvent.medName} pour {popupEvent.medSpecialty}</p>
+                        <p className="text-center">Rendez-vous avec {popupEvent.medName} pour {popupEvent.medSpecialty}.</p>
                     </div>
                 </div>
             </div>}

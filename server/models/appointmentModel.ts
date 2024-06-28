@@ -6,6 +6,7 @@ const appointmentSchema = new mongoose.Schema({
     title: String,
     start: Date,
     end: Date,
+    status: String,
     hospital: String,
     medName: String,
     medSpecialty: String,

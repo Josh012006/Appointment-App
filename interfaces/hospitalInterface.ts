@@ -1,4 +1,5 @@
 export default interface Hospital {
+    _id?: string,
     hospitalName: string,
     region: string,
     address: string,
