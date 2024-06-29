@@ -153,7 +153,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                 const newId = generateUniqueId();
                 infos.medID = newId;
                 infos.speciality = formData.get("speciality");
-                infos.gender = formData.get("genderM") ? "male" : "female";
+                infos.gender = formData.get("genderM") ? "Masculin" : "Féminin";
             }
         }
     
