@@ -27,7 +27,7 @@ function HeaderUsers ({UserType, SideBarFields, children} : {UserType: string, S
                 <div className="hidden lg:block scale-75">
                     <Brand />
                 </div>
-                <Profile UserType={UserType} />
+                <Profile UserType={UserType} SetShowSide={setShowSide} />
             </header>
             <main className="grid grid-cols-5 relative"  style = {{minHeight: '606px'}}>
                 {showSide && <div className="col-span-5 lg:col-span-1 z-30 absolute h-full w-full lg:w-auto lg:relative"><SideBar Fields={SideBarFields} Action={setShowSide} /></div>}

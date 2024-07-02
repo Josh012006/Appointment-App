@@ -80,7 +80,7 @@ function Reservation() {
 
         setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 3000);
     },[location]);
 
 

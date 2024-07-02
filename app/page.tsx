@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div className='animate-fadeOut mx-auto w-64 h-56 lg:w-96 lg:h-96 justify-center flex flex-col items-center mt-32 transform lg:scale-150'>
       <Brand />
-      <h1 className='font-bold text-xl mt-5'>Votre santé, notre priorité!</h1>
+      <h1 className='font-bold text-xl mt-5 text-center'>Votre santé, notre priorité!</h1>
     </div>
   );
 }

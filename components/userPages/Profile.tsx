@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 
 
-function Profile ({UserType} : {UserType: string}) {
+function Profile ({UserType, SetShowSide} : {UserType: string, SetShowSide: (b: boolean) => void}) {
 
     const [display, setDisplay] = useState<boolean>(false);
 
@@ -47,7 +47,7 @@ function Profile ({UserType} : {UserType: string}) {
             </div>
             {display && 
             <div className="flex flex-col justify-around w-full px-3 z-50 py-2 absolute top-full rounded-b-lg" style = {{backgroundColor: 'var(--side_color)'}}>
-                <Field Name="Mon profil" Href={`/userpage/${UserType}/profile`} OnClick={() => {}} />
+                <Field Name="Mon profil" Href={`/userpage/${UserType}/profile`} OnClick={() => {setDisplay(false); SetShowSide(false);}} />
                 <Field Name="Se déconnecter" Href={""} OnClick={() => {dispatch(logout());}} />
             </div>
             }
