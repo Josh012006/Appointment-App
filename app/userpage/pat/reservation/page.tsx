@@ -6,15 +6,18 @@ import HospitalSelection from "@/components/userPages/HospitalSelection";
 import SearchBar from "@/components/userPages/SearchBar";
 import Hospital from "@/interfaces/hospitalInterface";
 import User from "@/interfaces/userInterface";
+import { useAppSelector } from "@/redux/store";
+import sortHospitalsByDistance from "@/server/utils/sortHospitals";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 
 
 
 function Reservation() {
     const router  = useRouter();
+    const location = useAppSelector((state) => state.auth.infos?.location) as string;
 
     const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -38,8 +41,9 @@ function Reservation() {
                 }
                 else if(result.status === 200) {
                     console.log(result.data);
-                    setHospitals(result.data);
-                    setFilteredHospitals(result.data);
+                    const sortedHospitals = await sortHospitalsByDistance(location, result.data);
+                    setHospitals(sortedHospitals);
+                    setFilteredHospitals(sortedHospitals);
                 }
 
             } catch (error) {
@@ -76,8 +80,8 @@ function Reservation() {
 
         setTimeout(() => {
             setIsLoading(false);
-        }, 3000);
-    },[]);
+        }, 2000);
+    },[location]);
 
 
     const [hospitals, setHospitals] = useState<Hospital[]>([]);

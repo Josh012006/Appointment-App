@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
             return Response.json({message: 'Patient not found!'}, {status: 404});
         }
 
-        // Ajouter l'ID du médecin à la liste des ID de médecins de l'hôpital
+        // Ajouter l'ID du rendez-vous à la liste des rendez-vous du patient
         existingPat.appointments.push(result._id);
 
         // Enregistrer les modifications
@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         if(error instanceof MongooseError) {
             if (error.name === 'ValidationError') {
-            return Response.json({message: 'Validation error in addUser! ' + error.message}, {status: 500});
+            return Response.json({message: 'Validation error in addAppointment! ' + error.message}, {status: 500});
             } else {
-                return Response.json({message: 'Database error in addUser! ' + error.message}, {status: 500});
+                return Response.json({message: 'Database error in addAppointment! ' + error.message}, {status: 500});
             }
         }
 

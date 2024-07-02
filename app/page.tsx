@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      const user = Cookies.get('user');
+      const user = Cookies.get('userHealthAppointment');
 
       if (!user) {
           router.push('/auth/userselection');

@@ -8,6 +8,8 @@ const hospitalSchema = new mongoose.Schema({
     region: String,
     phoneNumber: String,
     address: String,
+    lat: Number,
+    lng: Number,
     availableSpecialities: {
         type: [String],
         default: []

@@ -31,7 +31,7 @@ function PatCalendar() {
                 }
                 else {
                     console.log(result.data);
-                    let appointments: Appointment[] = result.data.filter((appointment: Appointment) => appointment.status === 'confirmed' && new Date(new Date(appointment.end).getTime() + 5 * 60 * 60 * 1000) >= new Date());
+                    let appointments: Appointment[] = result.data.filter((appointment: Appointment) => appointment.status === 'confirmed' && new Date(new Date(appointment.end).getTime() + 2 * 60 * 60 * 1000) >= new Date());
 
                     appointments.forEach(appointment => {
                         appointment.start = new Date(appointment.start);
@@ -61,7 +61,7 @@ function PatCalendar() {
         setPopupEvent(null);
     }
 
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
 
 
     return (

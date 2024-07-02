@@ -14,7 +14,7 @@ function DoctorDisplay({doctorData}: {doctorData: User}) {
                 <p className="my-1"><span className="font-bold">Genre:</span> {doctorData.gender}</p>
                 <p className="my-1"><span className="font-bold">Email:</span> <span className="break-all">{doctorData.mail}</span></p>
                 <p className="my-1"><span className="font-bold">Téléphone:</span> +221 {doctorData.phone}</p>
-                <p className="my-1"><span className="font-bold">Spécialités:</span> {doctorData.speciality}</p>
+                <p className="my-1"><span className="font-bold">Spécialités:</span> {doctorData.speciality?.join(', ')}</p>
             </div>
             <div className="mx-auto">
                 <Link href={`/userpage/pat/reservation/${doctorData._id}`} style={{backgroundColor: 'var(--main_color)'}} className="text-white rounded-lg p-2 h-9 mx-auto my-2">Réserver</Link>

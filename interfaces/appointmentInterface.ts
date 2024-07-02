@@ -6,5 +6,6 @@ export default interface Appointment {
     status: string,
     hospital: string,
     medName: string,
+    medID: string,
     medSpecialty: string,
 }

@@ -5,7 +5,7 @@
 
 function PatRequests() {
     return(
-        <div>
+        <div className="p-3">
             <h1>Appointment requests</h1>
         </div>
     )

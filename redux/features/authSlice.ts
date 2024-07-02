@@ -20,14 +20,14 @@ const authSlice = createSlice({
     reducers: {
         logout: () => {
             // Détruire le cookie lors de la déconnexion
-            Cookies.remove('user');
+            Cookies.remove('userHealthAppointment');
 
             // Update le state
             return initialState;
         },
         login: (state, action) => {
             // Stocker les informations de l'utilisateur dans un cookie
-            Cookies.set('user', JSON.stringify(action.payload), { expires: 5 }); // Le cookie expirera après 5 jours
+            Cookies.set('userHealthAppointment', JSON.stringify(action.payload), { expires: 5 }); // Le cookie expirera après 5 jours
 
             // Update le state avec les informations du user
             return {
@@ -36,7 +36,7 @@ const authSlice = createSlice({
             };
         },
         loadUserFromCookie: (state) => {
-            const userCookie = Cookies.get('user');
+            const userCookie = Cookies.get('userHealthAppointment');
             if (userCookie) {
                 return {
                     isAuth: true,

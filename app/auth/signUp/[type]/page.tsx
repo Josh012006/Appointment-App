@@ -50,7 +50,7 @@ function SignUp() {
             const longitude: number = position.coords.longitude;
 
             // Créez l'URL Google Maps
-            const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            const googleMapsUrl = `${latitude},${longitude}`;
             setLocation(googleMapsUrl);
         }
 
@@ -155,9 +155,9 @@ function SignUp() {
             {type === "pat" && 
                 <div className="my-3 flex flex-col">
                     <label htmlFor = "location" className="my-3 font-bold">Votre localisation google maps</label>
-                    <p className="italic mb-3">Cette localisation aidera lors de la recherche des hôpitaux. Veuillez donc donner ou prendre la localisation à votre domicile.</p>
+                    <p className="italic mb-3">Cette localisation aidera lors de la recherche des hôpitaux. Veuillez donc prendre la localisation à votre domicile.</p>
                     <div className="grid grid-cols-5 items-center">
-                        <input id="location" name="location" placeholder="Votre localisation google maps" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black col-span-4" value={location} onChange = {(ev) => {setLocation(ev.target.value)}} />
+                        <input id="location" name="location" placeholder="Votre localisation google maps" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black col-span-4" value={location} readOnly />
                         <div onClick={handleAutomaticLocation} style={{backgroundColor: 'var(--main_color)'}} className="text-white p-4 h-12 rounded-lg items-center flex justify-center ml-2 col-span-1 cursor-pointer"><i className="fa-solid fa-location-dot" aria-hidden="true"></i></div>
                     </div>
                 </div>
