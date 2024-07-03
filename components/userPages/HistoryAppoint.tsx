@@ -13,7 +13,6 @@ function HistoryAppoint({event}: {event: Appointment}) {
             <p className="my-1"><span className="font-bold">Date:</span> {new Date(event.start).toLocaleDateString('fr-FR', options)}</p>
             <p className="my-1"><span className="font-bold">Lieu:</span> {event.hospital}</p>
             <p className="my-1"><span className="font-bold">Description:</span> Rendez-vous avec {event.medName} pour {event.medSpecialty}.</p>
-            <p className="my-1"><span className="font-bold">Statut:</span> {event.status}</p>
         </div>
     )
 }
