@@ -207,7 +207,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                     {error1 && !error2 && !success && <ErrorAlert>Veuillez entrer des informations valides ou vérifiez que vous êtes effectivement un {(userType === "pat")? "patient" : (userType === "sec")? "secrétaire" : "médecin"}!</ErrorAlert>}
                     {success && !error1 && !error2 && <SuccessAlert>{(Type === "login")? "Connexion réussie!" : "Inscription réussie!"}</SuccessAlert>}
                     {error2 && !error1 && !success && <ErrorAlert>Une erreur interne est survenue. Veuillez réessayer.</ErrorAlert>}
-                    {error3 && !error1 && !success && <ErrorAlert>Un tel utilisateur existe déjà! Veuillez vous connecter, vérifier que vous êtes vraiment le type d&apos;utilisateur que vous avez choisi ou changer d&apos;informations!</ErrorAlert>}
+                    {error3 && !error1 && !success && <ErrorAlert>Un tel utilisateur existe déjà! Veuillez vous connecter ou vérifier que vous êtes vraiment le type d&apos;utilisateur que vous avez choisi ou changer d&apos;informations!</ErrorAlert>}
                     {error4 && !success && <ErrorAlert>Assurez vous qu&apos;un médecin avec un tel medID travaille dans cet hôpital!</ErrorAlert>}
                     <>
                         {children}

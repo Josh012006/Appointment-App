@@ -12,7 +12,7 @@ export default function PatientLayout({
 }>) {
     return (
         <>
-            <HeaderUsers SideBarFields={{Calendrier: '/userpage/pat/calendar', Historique_médical:'/userpage/pat/history', Réserver_une_consultation: '/userpage/pat/reservation', Mes_demandes: '/userpage/pat/requests'}} UserType="pat">
+            <HeaderUsers SideBarFields={{Calendrier: '/userpage/sec/calendar', Demandes_de_consultation: '/userpage/sec/requests/pending'}} UserType="sec">
                 {children}
             </HeaderUsers>
         </>
