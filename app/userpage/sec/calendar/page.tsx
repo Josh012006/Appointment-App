@@ -3,10 +3,16 @@
 
 
 function SecCalendar() {
+    
     return (
-        <div>
-            <h1>SecCalendar</h1>
-        </div>
+        <>
+            <div>
+
+            </div>
+            <div>
+                <h1 className="mx-auto text-2xl font-bold text-center">Calendrier</h1>
+            </div>
+        </>
     )
 }
 

@@ -5,7 +5,7 @@ import Appointment from '@/interfaces/appointmentInterface';
 import User from '@/interfaces/userInterface';
 import { useAppSelector } from '@/redux/store';
 import axios from 'axios';
-import { createPostponedAbortSignal } from 'next/dist/server/app-render/dynamic-rendering';
+
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -72,8 +72,8 @@ function PatCalendar() {
                     <div className='my-auto'>
                         <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
                         <p className="text-center">{new Date(popupEvent.start).toLocaleDateString('fr-FR', options)}</p>
-                        <p className="text-center">{popupEvent.hospital}</p>
-                        <p className="text-center">Rendez-vous avec {popupEvent.medName} pour {popupEvent.medSpecialty}.</p>
+                        <p className="text-center font-bold">{popupEvent.hospital}</p>
+                        <p className="text-center">Rendez-vous avec <span className='font-bold'>{popupEvent.medName}</span> pour <span className='font-bold'>{popupEvent.medSpecialty}</span>.</p>
                     </div>
                 </div>
             </div>}
