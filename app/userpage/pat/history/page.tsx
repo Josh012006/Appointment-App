@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import Loader from "@/components/Loader";
 
 
 
@@ -19,6 +20,9 @@ function PatHistory() {
 
     const [history, setHistory] = useState<Appointment[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [loading, setLoading] = useState<boolean>(true);
+
     const itemsPerPage = 10; // Nombre d'éléments par page
 
     const user = useAppSelector(state => state.auth.infos) as User;
@@ -43,16 +47,17 @@ function PatHistory() {
                         appointment.end = new Date(appointment.end);
                     });
                     console.log(appointments);
+                    setLoading(false);
                     setHistory(appointments);
                 }
 
             } catch (error) {
-                router.refresh();
+                location.reload();
             }
         }
 
         fetchHistory();
-    }, [user, router]);
+    }, [user]);
 
 
 
@@ -69,7 +74,8 @@ function PatHistory() {
         <div className="p-3">
             <h1 className="mx-auto text-2xl font-bold text-center">Historique médical</h1>
             <p className="text-center my-3 mx-auto">Ici vous pourrez voir vos anciens rendez-vous. Pour voir ceux à venir ou ceux actuels veuillez vous référer au calendrier!</p>
-            <div className="flex flex-col">
+            <div className="flex flex-col lg:grid lg:grid-cols-2">
+                {loading && <div className="mx-auto my-5"><Loader color="#36d7b7" size={40} /></div>}
                 {history && currentPageItems.map((event: Appointment) => (
                     <HistoryAppoint key={event._id} event={event} />
                 ))}

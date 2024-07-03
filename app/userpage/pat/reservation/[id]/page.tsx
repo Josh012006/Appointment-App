@@ -54,11 +54,11 @@ function ReservationProcess () {
 
             } catch (error) {
                 console.log(error);
-                router.refresh();
+                location.reload();
             }
         }
         fetchDoctorInfos();
-    }, [id, router]);
+    }, [id]);
 
 
 

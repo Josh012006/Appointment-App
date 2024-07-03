@@ -24,6 +24,7 @@ export async function POST (req: NextRequest) {
         }
 
     } catch (error) {
+        console.log(error);
         return Response.json({message: 'Problem with getAll Appointments! '+ error}, {status: 500});
     }
 }

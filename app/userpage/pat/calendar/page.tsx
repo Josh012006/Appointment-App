@@ -42,12 +42,12 @@ function PatCalendar() {
                 }
 
             } catch (error) {
-                router.refresh();
+                location.reload();
             }
         }
 
         fetchAppointments();
-    }, [user, router]);
+    }, [user]);
 
 
 

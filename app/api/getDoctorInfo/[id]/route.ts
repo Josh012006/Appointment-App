@@ -1,6 +1,6 @@
 import connectDB from "@/server/config/db";
 import doctorModel from "@/server/models/users/medModel";
-import { NextApiResponse } from "next";
+
 import { NextRequest } from "next/server";
 
 

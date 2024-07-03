@@ -1,6 +1,7 @@
 
 
 export default interface MyRequest {
+    _id?: string,
     patientInfo: {
         patientID: string,
         name: string,

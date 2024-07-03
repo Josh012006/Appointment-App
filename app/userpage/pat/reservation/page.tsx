@@ -12,6 +12,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
+import Pagination from '@mui/material/Pagination';
+
 
 
 
@@ -116,6 +118,25 @@ function Reservation() {
     }, [applyFilter, filter, filterOption, hospitals, doctors]);
 
 
+
+
+    //Gestion de la pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20; // Définissez le nombre d'éléments par page
+
+    // Calculer le nombre total de pages
+    const pageCount = Math.ceil(filteredHospitals.length / itemsPerPage);
+
+    // Obtenir les éléments pour la page actuelle
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredHospitals.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleChange = (event:any, value:any) => {
+        setCurrentPage(value);
+    };
+
+
     return(
         <div className="p-3">
             <h1 className="mx-auto text-2xl font-bold text-center">Prenez rendez-vous!</h1>
@@ -137,9 +158,29 @@ function Reservation() {
                     <Loader color="#36d7b7" size={40} />
                 </div>}
                 <div className="w-full">
-                    {!isLoading && filteredHospitals && ((filteredHospitals.length === 0 )? <p className="text-center my-9">Aucun résultat pour cette recherche!</p> : filteredHospitals.map((hospital) => {
-                        return <HospitalSelection key={hospital._id} Hospital={hospital} Doctors={filteredDoctors} />
-                    }))}
+                    {!isLoading && filteredHospitals && (
+                        <>
+                            {filteredHospitals.length === 0 ? (
+                                <p className="text-center my-9">Aucun résultat pour cette recherche!</p>
+                            ) : (
+                                <>
+                                    {currentItems.map((hospital) => (
+                                        <HospitalSelection key={hospital._id} Hospital={hospital} Doctors={filteredDoctors} />
+                                    ))}
+                                    <div className="flex justify-center my-4">
+                                        <Pagination 
+                                            count={pageCount} 
+                                            page={currentPage} 
+                                            onChange={handleChange} 
+                                            color="primary"
+                                            variant="outlined"
+                                            shape="rounded"
+                                        />
+                                    </div>
+                                </>
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
         </div>
