@@ -74,11 +74,13 @@ function PatHistory() {
         <div className="p-3">
             <h1 className="mx-auto text-2xl font-bold text-center">Historique médical</h1>
             <p className="text-center my-3 mx-auto">Ici vous pourrez voir vos anciens rendez-vous. Pour voir ceux à venir ou ceux actuels veuillez vous référer au calendrier!</p>
-            <div className="flex flex-col lg:grid lg:grid-cols-2">
+            <div className="flex flex-col">
                 {loading && <div className="mx-auto my-5"><Loader color="#36d7b7" size={40} /></div>}
-                {history && currentPageItems.map((event: Appointment) => (
-                    <HistoryAppoint key={event._id} event={event} />
-                ))}
+                <div className="flex flex-col lg:grid lg:grid-cols-2">
+                    {history && currentPageItems.map((event: Appointment) => (
+                        <HistoryAppoint key={event._id} event={event} />
+                    ))}
+                </div>
             </div>
             <Stack spacing={2} alignItems="center">
                 <Pagination
