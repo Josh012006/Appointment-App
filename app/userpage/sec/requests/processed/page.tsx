@@ -1,4 +1,5 @@
-import e from "express"
+import NavigButton from "@/components/userPages/NavigButton";
+
 
 
 
@@ -7,8 +8,8 @@ import e from "express"
 
 function ProcessedRequests() {
     return (
-        <div>
-            <h1>Processed Requests</h1>
+        <div className="p-3">
+            <NavigButton />
         </div>
     )
 }

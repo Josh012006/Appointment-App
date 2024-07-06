@@ -1,13 +1,14 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Calendar, momentLocalizer, View } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/fr';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { Event, EventProps } from 'react-big-calendar';
+
 import Appointment from '@/interfaces/appointmentInterface';
+
 
 
 
@@ -18,14 +19,14 @@ const localizer = momentLocalizer(moment);
 interface MyCalendarProps {
     Events: Appointment[];
     SetPopup: (state: boolean) => void;
-    eventPop: boolean;
-    SetSelected: (event: Appointment | null) => void;
+    SetSelected: (event: any) => void;
+    UserType: string;
 }
 
 
 
 
-function MyCalendar({Events, SetPopup, eventPop, SetSelected}: MyCalendarProps) {
+function MyCalendar({Events, SetPopup, SetSelected, UserType}: MyCalendarProps) {
 
     const [view, setView] = useState<View | undefined>('month');
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -52,7 +53,11 @@ function MyCalendar({Events, SetPopup, eventPop, SetSelected}: MyCalendarProps) 
             backgroundColor = 'orange';
         }
         else {
-            backgroundColor = 'red';
+            if (UserType === 'pat') {
+                backgroundColor = 'red';
+            } else {
+                backgroundColor = 'blue';
+            }
         }
 
         const border = isSelected ? '3px dashed #000' : '0px';

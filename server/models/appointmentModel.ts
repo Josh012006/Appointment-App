@@ -10,6 +10,7 @@ const appointmentSchema = new mongoose.Schema({
     hospital: String,
     medName: String,
     medID: String,
+    patientID: String,
     medSpecialty: String,
 });
 

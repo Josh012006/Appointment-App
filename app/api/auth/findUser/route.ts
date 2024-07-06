@@ -19,15 +19,15 @@ export async function POST(req: NextRequest) {
         let result = null;
 
         if(type === "pat") {
-            result = await patientModel.findOne({ ...fields });
+            result = await patientModel.findOne({ ...fields, type });
         }
         else if(type === "sec") {
             console.log({...fields});
-            result = await secretaryModel.findOne({ ...fields });
+            result = await secretaryModel.findOne({ ...fields, type });
             console.log(result);
         }
         else if(type === "med") {
-            result = await doctorModel.findOne({ ...fields });
+            result = await doctorModel.findOne({ ...fields, type });
         }
 
         if(result === null) {

@@ -14,7 +14,7 @@ export async function POST (req: NextRequest, res: NextApiResponse) {
 
         await connectDB();
 
-        const response = await doctorModel.findOne({ medID : id, hospital });
+        const response = await doctorModel.findOne({ medID : id, hospital, type: "med" });
 
         if(response === null) {
             return Response.json({message: 'Doctor not found!'}, {status: 404});
@@ -24,6 +24,7 @@ export async function POST (req: NextRequest, res: NextApiResponse) {
         }
 
     } catch(error) {
+        console.log(error);
         return Response.json({message: 'Problem with verifyMed! '+ error}, {status: 500});
     }
 }

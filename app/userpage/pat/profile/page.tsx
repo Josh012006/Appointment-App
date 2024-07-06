@@ -60,7 +60,7 @@ function PatProfile () {
 
 
     // Gestion de la localisation
-    const [location, setLocation] = useState(user?.location?? '');
+    const [userLocation, setLocation] = useState(user?.location?? '');
     const handleAutomaticLocation = () => {
         const successCallback = (position: GeolocationPosition) => {
             const latitude: number = position.coords.latitude;
@@ -125,7 +125,7 @@ function PatProfile () {
                     const mail = formData.get("email");
                     const password = formData.get("password");
                     const region = formData.get("region");
-                    const location = formData.get("location");
+                    const userLocation = formData.get("location");
                     const phone = formData.get("telephone");
 
                     const pt  = await hashPassword(password as string);
@@ -140,7 +140,7 @@ function PatProfile () {
                             mail,
                             password: pt,
                             region,
-                            location,
+                            location: userLocation,
                             phone
                         }
                     }
@@ -157,7 +157,7 @@ function PatProfile () {
                         setTimeout(() => {
                             setSuccess(false);
                             setModifying(false);
-                            router.push('/userpage/pat/profile');
+                            location.reload();
                         }, 2000);
                     }
                 }
@@ -202,12 +202,12 @@ function PatProfile () {
 
                 {!modifying && <ProfileInput ReadOnly={true} Type="text" Placeholder="Dakar par exemple" Label="Région" ID="region" Value={user?.region?? ""} />}
                 {modifying && <Select ID="region" Placeholder="Dakar par exemple" Label="Région" optionsTab={["Banjul", "Dakar", "Diourbel", "Kaolack", "Kayes", "Mbour", "Saint-Louis", "Thiès", "Touba", "Ziguinchor"]} />}
-                {!modifying && <ProfileInput ReadOnly={true} Type="text" Placeholder="Localisation" Label="Votre localisation google maps" ID="location" Value={location} />}
+                {!modifying && <ProfileInput ReadOnly={true} Type="text" Placeholder="Localisation" Label="Votre localisation google maps" ID="location" Value={userLocation} />}
                 {modifying && <div className="my-3 flex flex-col">
                     <label htmlFor = "location" className="my-3 font-bold">Votre localisation google maps</label>
                     <p className="italic mb-3">Cette localisation aidera lors de la recherche des hôpitaux. Veuillez donc donner ou prendre la localisation à votre domicile.</p>
                     <div className="grid grid-cols-5 items-center">
-                        <input id="location" name="location" placeholder="Votre localisation google maps" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black col-span-4" value={location} onChange = {(ev) => {setLocation(ev.target.value)}} />
+                        <input id="location" name="location" placeholder="Votre localisation google maps" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black col-span-4" value={userLocation} onChange = {(ev) => {setLocation(ev.target.value)}} />
                         <div onClick={handleAutomaticLocation} style={{backgroundColor: 'var(--main_color)'}} className="text-white p-4 h-12 rounded-lg items-center flex justify-center ml-2 col-span-1 cursor-pointer"><i className="fa-solid fa-location-dot" aria-hidden="true"></i></div>
                     </div>
                 </div>}

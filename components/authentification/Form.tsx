@@ -188,7 +188,7 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
             } else if (signUpRes.status === 200) {
                 setIsLoading(false);
                 setSuccess(true);
-                dispatch(login(infos));
+                dispatch(login(signUpRes.data));
                 setTimeout(() => {
                     setIsLoading(false);
                     router.push(`/userpage/${userType}/calendar`);

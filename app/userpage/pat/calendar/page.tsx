@@ -7,7 +7,7 @@ import { useAppSelector } from '@/redux/store';
 import axios from 'axios';
 
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function PatCalendar() {
@@ -53,8 +53,8 @@ function PatCalendar() {
 
 
     // Gestion du popup lors de la sélection d'un événement
-    const [showPopup, setShowPopup] = React.useState<boolean>(false);
-    const [popupEvent, setPopupEvent] = React.useState<any>(null);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [popupEvent, setPopupEvent] = useState<any>(null);
 
     const handleClosing = () => {  
         setShowPopup(false);
@@ -79,7 +79,7 @@ function PatCalendar() {
             </div>}
             <div>
                 <h1 className="mx-auto text-2xl font-bold text-center">Mon Calendrier</h1>
-                <MyCalendar Events={events} SetPopup={setShowPopup} eventPop={popupEvent} SetSelected = {setPopupEvent} />
+                <MyCalendar Events={events} SetPopup={setShowPopup} SetSelected = {setPopupEvent} UserType='pat' />
             </div>
         </>
     )

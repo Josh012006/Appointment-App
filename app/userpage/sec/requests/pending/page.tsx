@@ -1,3 +1,4 @@
+import NavigButton from "@/components/userPages/NavigButton";
 
 
 
@@ -5,9 +6,14 @@
 
 
 function PendingRequests() {
+
+
+
+
+
     return(
-        <div>
-            <h1>Pending Requests</h1>
+        <div className="p-3">
+            <NavigButton />
         </div>
     )
 }
