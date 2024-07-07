@@ -39,7 +39,7 @@ function MyCalendar({Events, SetPopup, SetSelected, UserType}: MyCalendarProps) 
     };
 
     const eventPropGetter = (event: Appointment, start: Date, end: Date, isSelected: Boolean) => {
-        let backgroundColor = 'green'; // Couleur par défaut
+        let backgroundColor = 'rgb(22 163 74)'; // Couleur par défaut
 
         // Calcul de la différence en jours
         const currentDate = new Date();
@@ -48,15 +48,15 @@ function MyCalendar({Events, SetPopup, SetSelected, UserType}: MyCalendarProps) 
         const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
     
         if (dayDiff > 3) {
-            backgroundColor = 'green';
+            backgroundColor = 'rgb(22 163 74)';
         } else if (dayDiff > 0) {
-            backgroundColor = 'orange';
+            backgroundColor = 'rgb(250 204 21)';
         }
         else {
             if (UserType === 'pat') {
-                backgroundColor = 'red';
+                backgroundColor = 'rgb(248 113 113)';
             } else {
-                backgroundColor = 'blue';
+                backgroundColor = 'rgb(29 78 216)';
             }
         }
 

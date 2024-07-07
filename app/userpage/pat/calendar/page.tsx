@@ -79,6 +79,27 @@ function PatCalendar() {
             </div>}
             <div>
                 <h1 className="mx-auto text-2xl font-bold text-center">Mon Calendrier</h1>
+                <p className='m-5 text-center'>Vous pouvez voir ici vos rendez-vous dans le calendrier. Veuillez appuyez sur un rendez-vous pour voir les informations le concernant.
+                    Ne manquez également de consulter l&apos;aperçu agenda du calendrier qui offre de plus amples informations sur les rendez-vous pendant une durée d&apos;un mois.
+                </p>
+                <div className='m-5 flex flex-col items-center'>
+                    <p className='m-2 text-center font-bold'>Explication du code de couleurs</p>
+                    <div className='flex flex-col lg:flex-row items-center justify-center'>
+                        <div className='flex items-center m-2'>
+                            <div className='w-5 h-5 bg-green-600 rounded-full m-1'></div>
+                            <p>Rendez-vous éloigné</p>
+                        </div>
+                        <div className='flex items-center m-2'>
+                            <div className='w-5 h-5 bg-yellow-400 rounded-full m-1'></div>
+                            <p>Rendez-vous imminent</p>
+                        </div>
+                        <div className='flex items-center m-2'>
+                            <div className='w-5 h-5 bg-red-400 rounded-full m-1'></div>
+                            <p>Date dépassée</p>
+                        </div>
+                    </div>
+                    <p className='text-center my-3'><span className='font-bold'>NB:</span> Veuillez noter que les rendez-vous dont l&apos;heure est dépassée disparaitront du calendrier quelques heures après que leur heure convenue soit passée.</p>
+                </div>
                 <MyCalendar Events={events} SetPopup={setShowPopup} SetSelected = {setPopupEvent} UserType='pat' />
             </div>
         </>
