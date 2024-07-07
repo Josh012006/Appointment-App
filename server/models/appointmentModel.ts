@@ -12,6 +12,7 @@ const appointmentSchema = new mongoose.Schema({
     medID: String,
     patientID: String,
     medSpecialty: String,
+    ID: String
 });
 
 const appointmentModel = mongoose.models.appointment || mongoose.model('appointment', appointmentSchema);

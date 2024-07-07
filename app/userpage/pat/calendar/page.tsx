@@ -6,7 +6,6 @@ import User from '@/interfaces/userInterface';
 import { useAppSelector } from '@/redux/store';
 import axios from 'axios';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 
@@ -16,7 +15,6 @@ function PatCalendar() {
 
     const user = useAppSelector(state => state.auth.infos) as User;
 
-    const router = useRouter();
 
 
     useEffect(() => {
@@ -30,14 +28,12 @@ function PatCalendar() {
                     throw Error('An error occured while fetching appointments!');
                 }
                 else {
-                    console.log(result.data);
                     let appointments: Appointment[] = result.data.filter((appointment: Appointment) => appointment.status === 'confirmed' && new Date(new Date(appointment.end).getTime() + 2 * 60 * 60 * 1000) >= new Date());
 
                     appointments.forEach(appointment => {
                         appointment.start = new Date(appointment.start);
                         appointment.end = new Date(appointment.end);
                     });
-                    console.log(appointments);
                     setEvents(appointments);
                 }
 
@@ -74,6 +70,7 @@ function PatCalendar() {
                         <p className="text-center">{new Date(popupEvent.start).toLocaleDateString('fr-FR', options)}</p>
                         <p className="text-center font-bold">{popupEvent.hospital}</p>
                         <p className="text-center">Rendez-vous avec <span className='font-bold'>{popupEvent.medName}</span> pour <span className='font-bold'>{popupEvent.medSpecialty}</span>.</p>
+                        <h2 className='font-bold text-center mt-5 mb-2 text-xl'>ID du rendez-vous: {popupEvent.ID}</h2>
                     </div>
                 </div>
             </div>}
