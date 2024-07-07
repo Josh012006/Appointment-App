@@ -27,7 +27,7 @@ const authSlice = createSlice({
         },
         login: (state, action) => {
             // Stocker les informations de l'utilisateur dans un cookie
-            Cookies.set('userHealthAppointment', JSON.stringify(action.payload), { expires: 5 }); // Le cookie expirera après 5 jours
+            Cookies.set('userHealthAppointment', JSON.stringify(action.payload), { expires: 5, sameSite: 'Strict' }); // Le cookie expirera après 5 jours
 
             // Update le state avec les informations du user
             return {
