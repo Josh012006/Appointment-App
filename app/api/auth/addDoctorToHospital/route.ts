@@ -35,6 +35,7 @@ export async function PATCH(req: NextRequest, res: NextApiResponse) {
         }
 
     } catch(error) {
+        console.error(error);
         return Response.json({message: 'Problem with addDoctorToHospital! '+ error}, {status: 500});
     }
 }

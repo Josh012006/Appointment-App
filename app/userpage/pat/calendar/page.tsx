@@ -63,7 +63,7 @@ function PatCalendar() {
     return (
         <>
             {showPopup && <div className='absolute flex justify-center items-center w-full h-full z-50' style={{backgroundColor: 'rgba(100, 116, 139, 0.7)'}}>
-                <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 h-96'>
+                <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 min-h-96'>
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosing} aria-hidden="true"></i>
                     <div className='my-auto'>
                         <h1 className="text-2xl font-bold text-center">{popupEvent.title}</h1>
@@ -77,7 +77,7 @@ function PatCalendar() {
             <div>
                 <h1 className="mx-auto text-2xl font-bold text-center">Mon Calendrier</h1>
                 <p className='m-5 text-center'>Vous pouvez voir ici vos rendez-vous dans le calendrier. Veuillez appuyez sur un rendez-vous pour voir les informations le concernant.
-                    Ne manquez également de consulter l&apos;aperçu agenda du calendrier qui offre de plus amples informations sur les rendez-vous pendant une durée d&apos;un mois.
+                    Ne manquez également pas de consulter l&apos;aperçu agenda du calendrier qui offre un meilleur aperçu sur les rendez-vous pendant une durée d&apos;un mois.
                 </p>
                 <div className='m-5 flex flex-col items-center'>
                     <p className='m-2 text-center font-bold'>Explication du code de couleurs</p>

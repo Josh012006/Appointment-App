@@ -14,7 +14,7 @@ export async function POST(req:NextRequest, res:NextApiResponse) {
 
         await connectDB();
 
-        const results = await requestModel.find({"patientInfo.patientID": id});
+        const results = await requestModel.find({"patientInfo.patientID": id, status: {$ne: "Confirmé"}});
 
         if(!results) {
             return Response.json({message: 'No request found!'}, {status: 404});

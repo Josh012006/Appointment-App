@@ -20,13 +20,18 @@ const requestSchema = new mongoose.Schema({
     doctorInfo: {
         doctorId: String,
         medID: String,
+        medName: String,
     },
     hospital: String,
     status: {
         type: String,
         default: "En attente",
     },
-});
+    appointID: {
+        type: String,
+        default: "",
+    },
+}, { timestamps: true });
 
 
 const requestModel = mongoose.models.request || mongoose.model('request', requestSchema);

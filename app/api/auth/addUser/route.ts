@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
         return Response.json(result, {status: 200});
 
     } catch(error) {
+        console.error(error);
         if(error instanceof MongooseError) {
             if (error.name === 'ValidationError') {
             return Response.json({message: 'Validation error in addUser! ' + error.message}, {status: 500});

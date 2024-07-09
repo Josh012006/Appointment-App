@@ -1,3 +1,6 @@
+"use client"
+
+
 import NavigButton from "@/components/userPages/NavigButton";
 
 

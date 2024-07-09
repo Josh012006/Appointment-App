@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         const newRequest = await new requestModel(request);
         const result = await newRequest.save();
 
+
         const existingPat = await patientModel.findById(request.patientInfo.patientID);
 
 
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
         }
 
     } catch (error) {
+        console.error(error);
         if(error instanceof MongooseError) {
             if (error.name === 'ValidationError') {
             return Response.json({message: 'Validation error in addRequest! ' + error.message}, {status: 500});

@@ -31,11 +31,11 @@ function RequestDisplay({request, SetError} : {request: MyRequest, SetError: (er
         }
     }
 
-    const color = request.status === 'En attente' ? 'bg-yellow-200 text-yellow-500' : request.status === 'En étude' ? 'bg-green-200 text-green-500' : 'bg-red-200 text-red-500';
+    const color = (request.status === 'En attente' || request.status === 'Confirmé') ? 'bg-yellow-200 text-yellow-500' : request.status === 'En étude' ? 'bg-green-200 text-green-500' : 'bg-red-200 text-red-500';
 
 
     return (
-        <div className='rounded-lg border p-4 m-4 bg-white min-h-28 text-justify'>
+        <div className='rounded-lg shadow-md border p-4 m-4 bg-white min-h-28 text-justify'>
             <h1 className="text-2xl my-2 font-bold text-center">Demande à {request.hospital} pour consultation en {request.patientInfo.specialty}</h1>
             <h2 className="text-xl my-1 underline">Vos informations générales</h2>
             <div className="flex flex-col lg:grid lg:grid-cols-2">

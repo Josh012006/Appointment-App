@@ -70,6 +70,9 @@ function Reservation() {
                     console.log(result.data);
                     setDoctors(result.data);
                     setFilteredDoctors(result.data);
+                    setTimeout(() => {
+                        setIsLoading(false);
+                    }, 2000);
                 }
 
             } catch (error) {
@@ -79,10 +82,6 @@ function Reservation() {
         }
 
         fetchDoctors();
-
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 3000);
     },[location]);
 
 
@@ -154,13 +153,13 @@ function Reservation() {
             </div>
             <div className="flex flex-col items-center">
                 {error && <ErrorAlert>Une erreur est survenue veuillez réessayer.</ErrorAlert>}
-                {isLoading && <div className="my-5 mx-auto">
+                {(isLoading || filteredHospitals.length === 0) && <div className="my-5 mx-auto">
                     <Loader color="#36d7b7" size={40} />
                 </div>}
                 <div className="w-full">
                     {!isLoading && filteredHospitals && (
                         <>
-                            {filteredHospitals.length === 0 ? (
+                            {(!isLoading && filteredHospitals.length === 0) ? (
                                 <p className="text-center my-9">Aucun résultat pour cette recherche!</p>
                             ) : (
                                 <>

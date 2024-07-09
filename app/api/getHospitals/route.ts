@@ -21,6 +21,7 @@ export async function GET (req: NextRequest, res: NextApiResponse) {
             return Response.json(response, {status: 200});
         }
     } catch (error) {
+        console.error(error);
         return Response.json({message: 'Problem with getHospitals! '+ error}, {status: 500});
     }
 }

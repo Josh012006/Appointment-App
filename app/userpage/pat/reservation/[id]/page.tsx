@@ -108,7 +108,8 @@ function ReservationProcess () {
                 },
                 doctorInfo: {
                     doctorId: doctorInfos?._id?? "",
-                    medID: doctorInfos?.medID?? ""
+                    medID: doctorInfos?.medID?? "",
+                    medName: "Dr. " + doctorInfos?.firstName + " " + doctorInfos?.lastName,
                 },  
                 hospital: doctorInfos?.hospital?? ""
             }

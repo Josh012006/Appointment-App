@@ -12,7 +12,6 @@ import doctorModel from '@/server/models/users/medModel';
 export async function POST(req: NextRequest) {
     try {
         const {type, fields} = await req.json();
-        console.log({type, fields});
 
         await connectDB();
 
@@ -22,9 +21,7 @@ export async function POST(req: NextRequest) {
             result = await patientModel.findOne({ ...fields, type });
         }
         else if(type === "sec") {
-            console.log({...fields});
             result = await secretaryModel.findOne({ ...fields, type });
-            console.log(result);
         }
         else if(type === "med") {
             result = await doctorModel.findOne({ ...fields, type });
@@ -38,6 +35,7 @@ export async function POST(req: NextRequest) {
         }
 
     } catch(error) {
+        console.error(error);
         return Response.json({message: 'Problem with findUser! '+ error}, {status: 500});
     }
 }

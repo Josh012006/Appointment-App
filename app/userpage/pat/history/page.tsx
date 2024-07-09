@@ -6,7 +6,6 @@ import Appointment from "@/interfaces/appointmentInterface";
 import User from "@/interfaces/userInterface";
 import { useAppSelector } from "@/redux/store";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
@@ -26,7 +25,6 @@ function PatHistory() {
     const itemsPerPage = 10; // Nombre d'éléments par page
 
     const user = useAppSelector(state => state.auth.infos) as User;
-    const router = useRouter();
 
     useEffect(() => {
         async function fetchHistory () {

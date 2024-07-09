@@ -20,7 +20,11 @@ export default interface MyRequest {
     doctorInfo: {
         doctorId: string,
         medID: string,
+        medName: string,
     },
     hospital: string,
     status?: string,
+    createdAt?: Date,
+    updatedAt?: Date,
+    appointID?: string,
 }

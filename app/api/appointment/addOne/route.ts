@@ -36,10 +36,11 @@ export async function POST(req: NextRequest) {
             return Response.json({message: 'Sauvegarde dans addAppointment a échoué!'}, {status: 500});
         }
         else {
-            return Response.json(updatedPat, {status: 200});
+            return Response.json(result, {status: 200});
         }
 
     } catch (error) {
+        console.log(error);
         if(error instanceof MongooseError) {
             if (error.name === 'ValidationError') {
             return Response.json({message: 'Validation error in addAppointment! ' + error.message}, {status: 500});
