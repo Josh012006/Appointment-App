@@ -193,7 +193,7 @@ function ReservationProcess () {
                                 <label htmlFor = "description" className="my-3 font-bold">Description de la maladie et des symptômes</label>
                                 <p className="italic m-2">Décrivez au maximum ce que vous ressentez!</p>
                                 <textarea id="description" name="description" placeholder="Dites-nous ce que vous ressentez" className="p-4 min-h-72 rounded-lg border-2 border-solid border-black" />
-                                <label htmlFor = "background" className="my-3 font-bold">Description de la maladie et des symptômes</label>
+                                <label htmlFor = "background" className="my-3 font-bold">Description d&apos;éventuels antécédents</label>
                                 <p className="italic m-2">Avez-vous des antécédents que vous pensez important de préciser ?</p>
                                 <textarea id="background" name="background" placeholder="Parlez-nous de vos antécédents" className="p-4 min-h-72 rounded-lg border-2 border-solid border-black" />
                             </div>

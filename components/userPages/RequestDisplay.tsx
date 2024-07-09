@@ -16,7 +16,14 @@ function RequestDisplay({request, SetError} : {request: MyRequest, SetError: (er
             const result = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/deleteOne/${request._id}`, { validateStatus: status => status >= 200 });
 
             if(result.status === 200) {
-                location.reload();
+                const res1 = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/deleteFromUserTab?userId=${request.patientInfo.patientID}&requestId=${request._id}`, { validateStatus: status => status >= 200 });
+
+                if(res1.status === 200) {
+                    location.reload();
+                }
+                else {
+                    throw Error('An error occured while deleting the request from user tab!');
+                }
             }
             else {
                 throw Error('An error occured while deleting the request!');

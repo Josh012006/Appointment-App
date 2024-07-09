@@ -90,8 +90,15 @@ function SeeRequest() {
                             const res3 = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/sendMail`, JSON.stringify({mail: request?.patientInfo.mail, subject: 'Notification de rendez-vous sur Health Appointment', content: `Vous venez de recevoir une confirmation de rendez-vous à ${request?.hospital} pour le ${date.toLocaleDateString('fr-FR')} à ${date.toLocaleTimeString('fr-FR')}. Ne le manquez pas et meilleure santé à vous! `}), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 });
 
                             if(res3.status === 200) {
-                                setLoading1(false);
-                                router.push('/userpage/sec/requests/pending');
+                                const res4 = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/deleteFromUserTab?userId=${request?.patientInfo.patientID}&requestId=${request?._id}`, { validateStatus: status => status >= 200 });
+
+                                if(res4.status === 200) {
+                                    setLoading1(false);
+                                    router.push('/userpage/sec/requests/pending');
+                                }
+                                else {
+                                    throw Error('An error occured while deleting the request from user tab!');
+                                }
                             }
                             else {
                                 throw Error('Erreur lors de l\'envoi du mail de confirmation!');
