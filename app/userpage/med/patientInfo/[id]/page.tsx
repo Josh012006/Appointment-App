@@ -51,13 +51,14 @@ function PatientInfo() {
 
     return (
         <>
+            <h1 className="font-bold my-5 text-center text-2xl">Informations du patient</h1>
             <span className="flex items-center border-2 rounded-lg w-max px-2 m-3 cursor-pointer" style = {{borderColor: 'var(--main_color)'}} onClick = {() => {router.push('/userpage/med/calendar')}} onMouseEnter={() => {setShow(true)}} onMouseLeave={() => {setShow(false)}}>
                 <Image src="/return.png" alt="Return" width={24} height={24} className="m-2" />
                 {show && <p className="font-bold text-xs">Retourner au calendrier</p>}
             </span>
             {!infos && <div className="mx-auto my-5 text-center"><Loader color="#36d7b7" size={40} /></div>}
             {infos && <div className="p-3">
-                <h1 className="font-bold text-center my-3">Informations générales sur le patient</h1>
+                <h1 className="underline text-center my-3">Informations générales sur le patient</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 items-center p-3">
                     <p><span className="font-bold">Nom:</span> {infos.patientInfo.name}</p>
                     <p><span className="font-bold">Email:</span> {infos.patientInfo.mail}</p>
@@ -70,7 +71,7 @@ function PatientInfo() {
                     <p><span className="font-bold">Lieu de naissance:</span> {infos.patientInfo.placeOfBirth}</p>
                 </div>
                 <br />
-                <h1 className="font-bold text-center my-3">Informations sur la maladie et les éventuels antécédents</h1>
+                <h1 className="underline text-center my-3">Informations sur la maladie et les éventuels antécédents</h1>
                 <div className="flex flex-col p-3 justify-around">
                     <p className="my-3"><span className="font-bold">Description des symptômes:</span> {infos.patientInfo.description}</p>
                     <p className="my-3"><span className="font-bold">Antécédents:</span> {infos.patientInfo.background}</p>
