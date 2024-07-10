@@ -51,11 +51,11 @@ function PatientInfo() {
 
     return (
         <>
-            <h1 className="font-bold my-5 text-center text-2xl">Informations du patient</h1>
             <span className="flex items-center border-2 rounded-lg w-max px-2 m-3 cursor-pointer" style = {{borderColor: 'var(--main_color)'}} onClick = {() => {router.push('/userpage/med/calendar')}} onMouseEnter={() => {setShow(true)}} onMouseLeave={() => {setShow(false)}}>
                 <Image src="/return.png" alt="Return" width={24} height={24} className="m-2" />
                 {show && <p className="font-bold text-xs">Retourner au calendrier</p>}
             </span>
+            <h1 className="font-bold my-5 text-center text-2xl">Informations du patient</h1>
             {!infos && <div className="mx-auto my-5 text-center"><Loader color="#36d7b7" size={40} /></div>}
             {infos && <div className="p-3">
                 <h1 className="underline text-center my-3">Informations générales sur le patient</h1>
