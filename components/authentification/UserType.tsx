@@ -9,9 +9,9 @@ function UserType () {
         <>
             <Brand />
             <div className="flex flex-col items-center justify-center lg:flex-row" style={{minHeight: '300px', paddingTop: "auto", paddingBottom: 'auto'}}>
-                <UserSelection link="/auth/login/pat/" images={["/users/patient.png", "/users/patient1.png"]}>Patient</UserSelection>
-                <UserSelection link="/auth/login/sec/" images={["/users/secretaire.png", "/users/secretaire1.png"]}>Secrétaire</UserSelection>
-                <UserSelection link="/auth/login/med/" images={["/users/medecin.png", "/users/medecin1.png"]}>Médecin</UserSelection>
+                <UserSelection link="/auth/login/pat/" images={["/users/patient.webp", "/users/patient1.webp"]}>Patient</UserSelection>
+                <UserSelection link="/auth/login/sec/" images={["/users/secretaire.webp", "/users/secretaire1.webp"]}>Secrétaire</UserSelection>
+                <UserSelection link="/auth/login/med/" images={["/users/medecin.webp", "/users/medecin1.webp"]}>Médecin</UserSelection>
             </div>
         </>
     )
