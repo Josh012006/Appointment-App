@@ -38,7 +38,6 @@ function PendingRequests() {
                     setRequests([]);
                 }
                 else if (result.status === 200) {
-                    console.log(result.data);
                     setRequests(result.data);
                 }
                 else if(result.status === 500){
