@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Health Appointment
+
+Health Appointment is a web application designed to facilitate booking medical appointments in Dakar. This project is built using Next.js and MongoDB, with features for both patients, secretaries and doctors.
+
+The app is done using information of Senegalese hospitals and characters.
+
+## Table of Contents
+- [Preview](#preview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Authentication](#authentication)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [Deployment](#deployment)
+
+## Preview
+<table>
+  <tr>
+    <td><img src="/preview1.webp" alt="preview1" width="200"/></td>
+    <td><img src="/preview2.webp" alt="preview2" width="200"/></td>
+  </tr>
+  <tr>
+    <td><img src="/preview3.webp" alt="preview3" width="200"/></td>
+    <td><img src="/preview4.webp" alt="preview4" width="200"/></td>
+  </tr>
+</table>
+
+
+## Features
+- User registration and login
+- Appointment booking and management
+- Requests Management for secretaries
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js v14.x or later
+- MongoDB
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Josh012006/Appointment-App.git
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+    Create a `.env.local` file in the root of your project and add the following variables:
+    ```bash
+    EMAIL_USER=your_email
+    EMAIL_PASSWORD=your_email_password_for_nodemailer_see_https://www.youtube.com/watch?v=QDIOBsMBEI0&t=707s
+    MONGO_URI=your_mongo_uri
+    NEXT_PUBLIC_DISTANCE_MATRIX_API_KEY=your_distance_matrix_api_from_https://distancematrix.ai/
+    NEXT_PUBLIC_API_URL='http://localhost:3000'
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-## Learn More
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Keeping track of appointments and consultations
+Each user has a calendar to keep track of its planned appointments or consultations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Booking Appointments
+- Patients can book appointments with doctors.
+- Doctors' secretaries can manage the requests.
+- The Doctors can see the planned consultations and the patient's infos.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Cookie-based Authentication
+- User authentication is handled using cookies with the `js-cookie` library.
+
+## Technologies Used
+- Next.js
+- MongoDB
+- Tailwind CSS
+- Mongoose
+- Nodemailer (for sending emails)
+- bcrypt (for encrypting passwords)
+- Redux Toolkit (for managing global state of the app)
+- js-cookie (for handling cookies)
+
+## Contributing
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some feature'`)
+5. Push to the branch (`git push origin feature/your-feature`)
+6. Create a new Pull Request
+
+## Deployment
+You can see the final product on https://health-appointment.vercel.app/
+
+Hope you enjoy! And give a star 🌟💫 to the repository if possible!
