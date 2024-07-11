@@ -187,6 +187,7 @@ function SignUp() {
             <>
                 {errorMedID && <ErrorAlert>Cet identifiant doit contenir exactement dix chiffres.</ErrorAlert>}
                 <label htmlFor = "medID" className="my-3 font-bold">ID du Médecin</label>
+                <p className="italic mb-3">C&apos;est une suite de chiffres donné à votre médecin lors de son inscription et qui assure la liaison entre vos interfaces. Il peut le trouver à tout moment dans son profil en haut à droite.</p>
                 <input id="medID" name="medID" placeholder="0123456789" required type="text" className="pl-4 h-12 rounded-lg border-2 border-solid border-black" value={medIDValue} onChange={(ev) => {setMedIDValue(ev.target.value);}} />
             </>}
 
