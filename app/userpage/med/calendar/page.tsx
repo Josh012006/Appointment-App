@@ -132,13 +132,13 @@ function MedCalendar() {
                         <p className="text-center">Consultation avec patient <span className='font-bold'>{selectedConsultation.patientInfos?.firstName + " " + selectedConsultation.patientInfos?.lastName}</span> pour examen en <span className='font-bold'>{popupEvent.medSpecialty}</span>.</p>
                         <p className="text-center my-5 font-bold">ID de la consultation: {selectedConsultation.appointment?.ID}</p>
                         <div className='flex justify-center'>
-                            <Link href={`/userpage/med/patientInfo/${selectedConsultation.appointment._id}`} className="m-4 p-2 text-white rounded-md" style={{backgroundColor: 'var(--main_color)'}}>Voir les informations du patient</Link>
+                            <Link href={`/userpage/med/patientInfo/${selectedConsultation.appointment._id}`} className="m-4 p-2 text-white rounded-md text-center" style={{backgroundColor: 'var(--main_color)'}}>Voir les informations du patient</Link>
                         </div>
                     </div>
                 </div>
             </div>}
             <div>
-                <h1 className="mx-auto my-2 text-2xl font-bold text-center">Calendrier</h1>
+                <h1 className="mx-auto my-2 text-xl lg:text-2xl font-bold text-center">Calendrier</h1>
                 <p className='m-5 text-center'>Vous pouvez voir ici vos consultations planifiées dans le calendrier. Veuillez appuyez sur une consultation pour voir les informations la concernant.
                     Ne manquez également pas de consulter l&apos;aperçu agenda du calendrier qui offre un meilleur aperçu sur les consultations pendant une durée d&apos;un mois.
                 </p>

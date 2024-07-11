@@ -43,8 +43,8 @@ function RequestDisplay({request, SetError} : {request: MyRequest, SetError: (er
 
     return (
         <div className='rounded-lg shadow-md border p-4 m-4 bg-white min-h-28 text-justify'>
-            <h1 className="text-2xl my-2 font-bold text-center">Demande à {request.hospital} pour consultation en {request.patientInfo.specialty}</h1>
-            <h2 className="text-xl my-1 underline">Vos informations générales</h2>
+            <h1 className="text-xl lg:text-2xl my-2 font-bold text-center">Demande à {request.hospital} pour consultation en {request.patientInfo.specialty}</h1>
+            <h2 className="text-base lg:text-xl my-1 underline">Vos informations générales</h2>
             <div className="flex flex-col lg:grid lg:grid-cols-2">
                 <p className="my-1"><span className="font-bold">Nom:</span> {request.patientInfo.name}</p>
                 <p className="my-1"><span className="font-bold">Mail:</span> <span className="whitespace-normal">{request.patientInfo.mail}</span></p>

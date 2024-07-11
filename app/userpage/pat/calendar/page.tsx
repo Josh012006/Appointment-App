@@ -75,7 +75,7 @@ function PatCalendar() {
                 </div>
             </div>}
             <div>
-                <h1 className="mx-auto text-2xl font-bold text-center">Mon Calendrier</h1>
+                <h1 className="mx-auto text-xl lg:text-2xl font-bold text-center">Mon Calendrier</h1>
                 <p className='m-5 text-center'>Vous pouvez voir ici vos rendez-vous dans le calendrier. Veuillez appuyez sur un rendez-vous pour voir les informations le concernant.
                     Ne manquez également pas de consulter l&apos;aperçu agenda du calendrier qui offre un meilleur aperçu sur les rendez-vous pendant une durée d&apos;un mois.
                 </p>

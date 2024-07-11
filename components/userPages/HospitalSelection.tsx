@@ -33,7 +33,7 @@ function HospitalSelection({Hospital, Doctors}: {Hospital: Hospital ,Doctors: Us
         <div className={doctorList.length === 0 ? "hidden" : "block"}>
             <div className="grid grid-cols-6 items-center rounded-lg shadow-md border p-4 mt-4 bg-white min-h-28 text-justify">
                 <div className="col-span-6 lg:col-span-5">
-                    <h1 className="text-2xl my-2 font-bold text-center">{Hospital.hospitalName}</h1>
+                    <h1 className="text-xl lg:text-2xl my-2 font-bold text-center">{Hospital.hospitalName}</h1>
                     <p className="my-1">{Hospital.region}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+221 {Hospital.phoneNumber}</p>
                     <p className="my-1">{Hospital.address}</p>
                 </div>

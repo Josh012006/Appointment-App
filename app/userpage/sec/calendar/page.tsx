@@ -127,7 +127,7 @@ function SecCalendar() {
                 </div>
             </div>}
             <div>
-                <h1 className="mx-auto my-2 text-2xl font-bold text-center">Calendrier</h1>
+                <h1 className="mx-auto my-2 text-xl lg:text-2xl font-bold text-center">Calendrier</h1>
                 <p className='m-5 text-center'>Vous pouvez voir ici vos consultations planifiées dans le calendrier. Veuillez appuyez sur une consultation pour voir les informations la concernant.
                     Ne manquez également pas de consulter l&apos;aperçu agenda du calendrier qui offre un meilleur aperçu sur les consultations pendant une durée d&apos;un mois.
                 </p>

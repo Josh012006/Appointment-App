@@ -66,7 +66,7 @@ function PendingRequests() {
     return(
         <div className="p-3">
             <NavigButton />
-            <h1 className="mx-auto text-2xl font-bold text-center my-2">Demandes en attente</h1>
+            <h1 className="mx-auto text-xl lg:text-2xl font-bold text-center my-2">Demandes en attente</h1>
             <p className="text-center my-3 mx-auto">Ici vous pourrez voir les demandes de rendez-vous que vous avez reçues. Vous pourrez les voir et attribuer une date et un horaire.</p>
             <div className="flex flex-col">
                 {loading && <div className="mx-auto my-5"><Loader color="#36d7b7" size={40} /></div>}
