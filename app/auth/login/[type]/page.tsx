@@ -2,12 +2,23 @@
 
 import Form from "@/components/authentification/Form";
 import Input from "@/components/authentification/Input";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-// J'ai trois types d'utilisateur pat, med, sec
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 
 function Login() {
+
+    const router = useRouter();
+    
+    useEffect   (() => {
+        const user = Cookies.get('userHealthAppointment');
+        if (user) {
+            const type = JSON.parse(user).type;
+            router.replace(`/userpage/${type}/calendar`);
+        }
+    }, [router]);
 
     const params = useParams();
     const type = params.type;

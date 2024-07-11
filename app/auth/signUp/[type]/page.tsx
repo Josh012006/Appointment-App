@@ -6,8 +6,10 @@ import PhoneBlock from "@/components/authentification/PhoneBlock";
 import Select from "@/components/authentification/Select";
 import ErrorAlert from "@/components/ErrorAlert";
 import generateHospitalTab from "@/server/utils/generateHospitalTab";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+
+import Cookies from "js-cookie";
 
 
 
@@ -22,6 +24,18 @@ function verifyPasswordConfirmation(password: string, passwordConfirm: string) :
 
 
 function SignUp() {
+    const router = useRouter();
+
+    useEffect   (() => {
+        const user = Cookies.get('userHealthAppointment');
+        if (user) {
+            const type = JSON.parse(user).type;
+            router.replace(`/userpage/${type}/calendar`);
+        }
+    }, [router]);
+
+
+
     const [gender, setGender] = useState({male: true, female: false});
     const [errorP, setErrorP] = useState(false);
     const [errorPC, setErrorPC] = useState(false);

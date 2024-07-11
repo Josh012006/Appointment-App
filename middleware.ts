@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
     const type = JSON.parse(token.value).type;
 
     const url = request.nextUrl.clone();
-    if (!url.pathname.startsWith(`/userpage/${type}`)) {
+    if (token && !url.pathname.startsWith(`/userpage/${type}`)) {
         return NextResponse.redirect(new URL('/forbidden', request.url));
     }
 
@@ -21,5 +21,5 @@ export function middleware(request: NextRequest) {
 
 
 export const config = {
-    matcher: '/userpage/:path*',
+    matcher: ['/userpage/:path*'],
 }

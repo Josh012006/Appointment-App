@@ -83,9 +83,9 @@ export default function Form ({children, ID, Type, userType, isValid} : {childre
                     await handleSignUp({ formData, mail, password });
                 }
             } catch (error) {
-                console.log(error);
                 setIsLoading(false);
                 setError2(true);
+                console.log(error);
             }
         }
     };

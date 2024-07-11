@@ -89,13 +89,40 @@ function MedCalendar() {
 
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
 
+    const [firstLogin, setFirstLogin] = useState<boolean>(doctorInfos?.firstLogin??  false);
 
+    const handleClosingMedIDMessage = async () => {
+        try {
+            setFirstLogin(false);
 
+            const result = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/updateUser`, JSON.stringify({ id: doctorInfos._id, type: 'med', newInfos: { firstLogin: false } }), { headers: { 'Content-Type': 'application/json' }, validateStatus: status => status >= 200 }); 
+            
+            if(result.status === 200) {
+                console.log('MedID message closed!');
+            }
+            else {
+                throw Error('An error occured while closing the MedID message!');
+            }
+
+        } catch (error) {
+            console.log(error);
+            location.reload();
+        }
+    }
 
 
 
     return (
         <>
+            {firstLogin && <div className='absolute flex justify-center items-center w-full h-full z-50' style={{backgroundColor: 'rgba(100, 116, 139, 0.7)'}}>
+                <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 min-h-96'>
+                    <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosingMedIDMessage} aria-hidden="true"></i>
+                    <div className='my-auto flex justify-center items-center flex-col text-center'>
+                        Votre medID est <span className='font-bold'>{doctorInfos.medID}</span>.<br />Veuillez le <span className='font-bold'>donner à votre secrétaire</span> pour qu&apos;elle puisse s&apos;inscrire sur la plateforme.
+                        Si vous l&apos;oubliez, vous pouvez le voir à tout moment <span className='font-bold'>dans votre profil.</span>
+                    </div>
+                </div>
+            </div>}
             {showPopup && selectedConsultation && <div className='absolute flex justify-center items-center w-full h-full z-50' style={{backgroundColor: 'rgba(100, 116, 139, 0.7)'}}>
                 <div className='rounded-lg border p-4 bg-white w-4/5 lg:w-1/3 min-h-96'>
                     <i className="fa-solid fa-xmark cursor-pointer" onClick={handleClosing} aria-hidden="true"></i>

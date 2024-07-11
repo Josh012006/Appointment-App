@@ -18,4 +18,5 @@ export default interface User {
 
     gender?: string;
     speciality?: string[];
+    firstLogin?: boolean;
 }

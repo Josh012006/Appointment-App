@@ -6,7 +6,7 @@ import Input from "@/components/authentification/Input";
 import Button from "@/components/authentification/Button";
 
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ErrorAlert from "@/components/ErrorAlert";
 import SuccessAlert from "@/components/SuccessAlert";
@@ -17,6 +17,8 @@ import Loader from "@/components/Loader";
 
 import Link from "next/link";
 
+import Cookies from "js-cookie";
+
 
 function PasswordReset () {
     const [error1, setError1] = useState(false);
@@ -26,6 +28,14 @@ function PasswordReset () {
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
+    useEffect   (() => {
+        const user = Cookies.get('userHealthAppointment');
+        if (user) {
+            const type = JSON.parse(user).type;
+            router.replace(`/userpage/${type}/calendar`);
+        }
+    }, [router]);
+    
     const params = useParams();
     const type = params.type;
 
