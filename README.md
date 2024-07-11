@@ -16,12 +16,10 @@ The app is done using information of Senegalese hospitals and characters.
 
 ## Preview
 <table>
-  <tr>
     <td><img src="/public/preview1.webp" alt="preview1"/></td>
     <td><img src="/public/preview2.webp" alt="preview2"/></td>
     <td><img src="/public/preview3.webp" alt="preview3"/></td>
     <td><img src="/public/preview4.webp" alt="preview4"/></td>
-  </tr>
 </table>
 
 
