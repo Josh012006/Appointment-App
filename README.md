@@ -15,12 +15,10 @@ The app is done using information of Senegalese hospitals and characters.
 - [Deployment](#deployment)
 
 ## Preview
-<table>
-    <td><img src="/public/preview1.webp" alt="preview1"/></td>
-    <td><img src="/public/preview2.webp" alt="preview2"/></td>
-    <td><img src="/public/preview3.webp" alt="preview3"/></td>
-    <td><img src="/public/preview4.webp" alt="preview4"/></td>
-</table>
+<img src="/public/preview1.webp" alt="preview1"/>
+<img src="/public/preview2.webp" alt="preview2"/>
+<img src="/public/preview3.webp" alt="preview3"/>
+<img src="/public/preview4.webp" alt="preview4"/>
 
 
 ## Features
