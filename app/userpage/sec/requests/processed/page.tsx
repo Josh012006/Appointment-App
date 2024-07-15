@@ -114,7 +114,7 @@ function ProcessedRequests() {
         <div className="p-3">
             <NavigButton />
             <h1 className="mx-auto text-xl lg:text-2xl font-bold text-center my-2">Demandes acceptées</h1>
-            <p className="text-center my-3 mx-auto">Ici vous pourrez voir les demandes de rendez-vous que vous avez acceptées. Vous pouvez rechercher un rendez-vous particulier grâce à son ID ou au nom du patient.</p>
+            <p className="text-center my-3 mx-auto">Ici vous pourrez voir les demandes de rendez-vous que vous avez acceptées. Vous pouvez rechercher un rendez-vous particulier grâce à son <span className="font-bold">ID (entrez entièrement l&apos;ID) ou au nom du patient</span>.</p>
             <div className="my-5 border-b-2 border-black pb-8">
                 <div className="grid grid-cols-5 lg:mx-5">
                     <select title="filterOptions" onChange={(e) => {setFilterOption(e.target.value);}} className="border-2 border-gray-300 rounded-md p-2 h-12 col-span-5 lg:col-span-1">
