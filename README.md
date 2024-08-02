@@ -96,6 +96,7 @@ Each user has a calendar to keep track of its planned appointments or consultati
 
 ## Possible Improvements
 - Password for authentication
+- More robust authentication
 - Financing options
 - Online consultations
 - Security
