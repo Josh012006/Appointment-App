@@ -94,6 +94,17 @@ Each user has a calendar to keep track of its planned appointments or consultati
 5. Push to the branch (`git push origin feature/your-feature`)
 6. Create a new Pull Request
 
+## Possible Improvements
+- Password for authentication
+- Financing options
+- Online consultations
+- Security
+- Rescheduling and Refunding
+- Considering the target population (language and communication means)
+- Keeping medical records in the database
+- Integrating the possibility for the patient to see the availability of the doctor
+
+
 ## Deployment
 You can see the final product on https://health-appointment.vercel.app/
 
