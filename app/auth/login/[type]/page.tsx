@@ -28,7 +28,7 @@ function Login() {
     return (
         <Form Type="login" ID = "loginForm" userType={myType} isValid = {true}>
             <Input Type="email" Placeholder="Adresse e-mail" Label="Email" ID="mail" />
-            <Input Type="text" Placeholder="Mot de passe" Label="Mot de passe" ID="password" />
+            <Input Type="password" Placeholder="Mot de passe" Label="Mot de passe" ID="password" />
         </Form>
     );
 }

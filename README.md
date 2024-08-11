@@ -95,7 +95,6 @@ Each user has a calendar to keep track of its planned appointments or consultati
 6. Create a new Pull Request
 
 ## Possible Improvements
-- Password for authentication
 - More robust authentication
 - Financing options
 - Online consultations
